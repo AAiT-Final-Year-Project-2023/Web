@@ -14,7 +14,7 @@ export default function Requests() {
       <section className="">
           <div className="">
           <Search/>
-              <h1 className="font-bold text-xl ml-2">Requests</h1>
+              <h1 className="font-bold text-4xl ml-2">Requests</h1>
               <p className="mb-4">loream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream 
     episom loream episomloream episom loream episom</p>
 

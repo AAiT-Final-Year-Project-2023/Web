@@ -32,8 +32,8 @@ export default function Home() {
                       B
                     </span>                
               </form> */}
-              <h1 className="text-black-500 font-bold">Home</h1>
-              <h3 className='font-semibold'>Recently Viewed</h3>
+              <h1 className="text-4xl font-bold">Home</h1>
+              <h3 className='font-semibold text-2xl'>Recently Viewed</h3>
             
               <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
     <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
@@ -46,7 +46,7 @@ export default function Home() {
                     CSS.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://headlessui.dev">
+                href="/dataset_detail">
                 more<span className="sr-only">, Completely unstyled, fully accessible UI components</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -65,7 +65,7 @@ export default function Home() {
                     Vue libraries.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heroicons.com">more
+                href="/dataset_detail">more
                 <span className="sr-only">, Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -84,7 +84,7 @@ export default function Home() {
                     projects.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heropatterns.com">
+                href="/dataset_detail">
                 more<span className="sr-only">, Seamless SVG background patterns by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -95,7 +95,7 @@ export default function Home() {
     </li>
 </ul>
 
-              <h3 className='font-semibold'>Datasets</h3>
+              <h3 className='font-semibold text-2xl'>Datasets</h3>
               <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
     <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
         <div className="order-1 sm:ml-6 xl:ml-0">
@@ -107,7 +107,7 @@ export default function Home() {
                     CSS.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://headlessui.dev">
+                href="/dataset_detail">
                 more<span className="sr-only">, Completely unstyled, fully accessible UI components</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -126,7 +126,7 @@ export default function Home() {
                     Vue libraries.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heroicons.com">
+                href="/dataset_detail">
                 more<span className="sr-only">, Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -145,7 +145,7 @@ export default function Home() {
                     projects.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heropatterns.com">
+                href="/dataset_detail">
                 more<span className="sr-only">, Seamless SVG background patterns by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -156,7 +156,7 @@ export default function Home() {
     </li>
 </ul>
 
-              <h3 className='font-semibold'>Requests</h3>
+              <h3 className='font-semibold text-2xl'>Requests</h3>
               <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
     <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
         <div className="order-1 sm:ml-6 xl:ml-0">
@@ -168,7 +168,7 @@ export default function Home() {
                     CSS.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://headlessui.dev">
+                href="/dataset_detail">
                 more<span className="sr-only">, Completely unstyled, fully accessible UI components</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -187,7 +187,7 @@ export default function Home() {
                     Vue libraries.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heroicons.com">
+                href="/dataset_detail">
                 more<span className="sr-only">, Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
@@ -206,7 +206,7 @@ export default function Home() {
                     projects.</p>
             </div><a
                 className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
-                href="https://heropatterns.com">
+                href="/dataset_detail">
                 more<span className="sr-only">, Seamless SVG background patterns by the makers of Tailwind CSS.</span><svg
                     className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
                     width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
