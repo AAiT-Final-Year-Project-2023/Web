@@ -19,6 +19,15 @@ export default function UploadDataset() {
               loream epis loraeam loream episom loream episom episomloraeam loream episom loream episom episomloraeam
               </p>
               
+              <div className="ml-20  mt-5">
+                <li>Title of the Dataset</li>
+                <li>Description</li>
+                <li>Number of datas</li>
+                <li>Data type/format (image, video, audio, text)</li>
+                <li>Data size</li>
+                <li>Acceses (Public/Private)</li>
+              </div>
+
             </div>
           </section>
       

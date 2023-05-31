@@ -2,7 +2,7 @@ import Sidebar from "../sidebar/page"
 import Footer from "../footer/page"
 import Search from "../navsearchprofile/page"
 
-export default function TextFormat() {
+export default function AudioFormat() {
   return (
     <div>
       <head>
@@ -14,7 +14,7 @@ export default function TextFormat() {
       <section className="">
           <div className="">
           <Search/>
-              <h1 className="text-3xl mt-5 mb-5 ml-1">Upload Text Data</h1>
+              <h1 className="text-3xl mt-5 mb-5 ml-1">Upload Audio Data</h1>
               <h1 className="text-2xl font-semibold ml-3 mb-1">Request Title Name</h1>  
                   <p className="mb-3 ml-3 mr-50">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support.</p>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-4">
@@ -25,9 +25,10 @@ export default function TextFormat() {
 
                 </div>
                 <div className="col-span-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="h-30 w-full viewBox=0 0 24 24 bg-gray-200 mt-10">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-30 w-full viewBox=0 0 24 24 bg-gray-200 mt-10">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
                 </svg>
+
                 </div>
             </div>
             </div>
