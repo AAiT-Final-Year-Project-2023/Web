@@ -1,4 +1,4 @@
-export default function UserNavbar(){
+export default function UserNavbar() {
     return (
         <nav>
             <h1>User Navbar</h1>

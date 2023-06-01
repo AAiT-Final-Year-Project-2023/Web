@@ -1,4 +1,4 @@
-import RequestPostCard from "@/components/requestpost/RequestPostCard";
+import RequestPostCard from '@/components/requestpost/RequestPostCard';
 
 export default function Page() {
     return (

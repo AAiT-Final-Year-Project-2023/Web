@@ -10,7 +10,10 @@ export default function Page() {
         event.preventDefault();
         // do frontend validation here
 
-        console.log({ username: username.current?.value, password: password.current?.value });
+        console.log({
+            username: username.current?.value,
+            password: password.current?.value,
+        });
 
         try {
             const res = await fetch('http://localhost:8000/api/auth/signin/', {
@@ -18,7 +21,10 @@ export default function Page() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: username.current?.value, password: password.current?.value }),
+                body: JSON.stringify({
+                    username: username.current?.value,
+                    password: password.current?.value,
+                }),
             });
             const data = await res.json();
             console.log(data);

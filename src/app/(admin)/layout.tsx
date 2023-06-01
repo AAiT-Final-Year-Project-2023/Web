@@ -6,11 +6,7 @@ export const metadata = {
     description: 'This is the admin dashboard of the Datashelf website',
 };
 
-export default function Layout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <body>
