@@ -1,6 +1,7 @@
 import Sidebar from "../sidebar/page"
 import Footer from "../footer/page"
 import Search from "../navsearchprofile/page"
+import Filter from "../searchsort/page"
 
 export default function Requests() {
   return (
@@ -17,6 +18,8 @@ export default function Requests() {
               <h1 className="font-bold text-4xl ml-2">Requests</h1>
               <p className="mb-4">loream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream 
     episom loream episomloream episom loream episom</p>
+
+    <Filter/>
 
 
 <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">

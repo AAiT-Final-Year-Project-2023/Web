@@ -14,24 +14,7 @@ export default function Home() {
       <div className='w-3/4 '>
       <section className={styles.center}>
           <div className={styles.container}>
-            <div>
-            {/* <div className='w-2/3'> */}
-          <Nav/>
-          {/* </div> */}
-          {/* <div className='w-1/3'> */}
-          {/* <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 ml-40">
-                      B
-                    </span> */}
-          {/* </div> */}
-        </div>
-            
-              {/* <form role="search" className='mt-5 mb-6 ml-5'>
-                <label htmlFor="search">Search</label>
-                <input className="ml-5 " id="search" type="search" placeholder="Search..." autoFocus required />
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 ml-40">
-                      B
-                    </span>                
-              </form> */}
+           
               <h1 className="text-4xl font-bold">Home</h1>
               <h3 className='font-semibold text-2xl'>Recently Viewed</h3>
             
