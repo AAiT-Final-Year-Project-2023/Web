@@ -17,12 +17,14 @@ export default function ImageAnnotatorComponent({
 }: {
     props: {
         tags: string[];
-        supported_extensions: string[];
-        initial_annotations?: ImageLabel[];
+        supportedExtensions: string[];
+        maxFileSize: number;
+        initialAnnotations?: ImageLabel[];
         cb: (arg: ImageLabel[]) => void;
     };
 }) {
-    const { tags, supported_extensions, initial_annotations, cb } = props;
+    const { tags, supportedExtensions, maxFileSize, initialAnnotations, cb } =
+        props;
     const [image, setImage] = useState<HTMLImageElement | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -49,6 +51,18 @@ export default function ImageAnnotatorComponent({
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
         if (file) {
+            if (!isSupportedFileExtension(file, 'image', supportedExtensions)) {
+                alert('Unsupported file type');
+                e.target.files = null
+                return;
+            }
+
+            if (!isSupportedFileSize(file, maxFileSize)) {
+                alert('File size too big');
+                e.target.files = null
+                return;
+            }
+
             const img = new Image();
             img.onload = handleImageLoad;
             img.src = URL.createObjectURL(file);
@@ -83,11 +97,35 @@ export default function ImageAnnotatorComponent({
         };
     }, [image]);
 
+    const isSupportedFileExtension = (
+        file: File,
+        fileType: string,
+        supportedExtensions: string[],
+    ): boolean => {
+        let fileTypeExtension = file.type.split('/');
+        const [currFileType, currFileExtension] = fileTypeExtension;
+        if (currFileType && currFileType === fileType) {
+            return true;
+        }
+
+        if (
+            currFileExtension &&
+            supportedExtensions.includes(currFileExtension)
+        ) {
+            return true;
+        }
+        return false;
+    };
+
+    const isSupportedFileSize = (file: File, maxFileSize: number): boolean => {
+        return file.size > maxFileSize;
+    };
+
     return (
         <div>
             <input
                 type="file"
-                accept={supported_extensions.join(',')}
+                accept={supportedExtensions.join(',')}
                 onChange={handleFileChange}
             />
             <div ref={containerRef} className="relative">

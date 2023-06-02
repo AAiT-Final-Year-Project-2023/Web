@@ -20,10 +20,7 @@ export default function VideoAnnotatorComponent() {
         console.log('Updated label:', updatedLabel);
     };
 
-    let labels: any = []
+    let labels: any = [];
 
-    return (
-        <>
-        </>
-    );
+    return <></>;
 }
