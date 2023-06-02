@@ -12,8 +12,6 @@ export type ImageLabel = {
     color: string;
 };
 
-// ...
-
 export default function ImageAnnotatorComponent({
     props,
 }: {
@@ -62,12 +60,18 @@ export default function ImageAnnotatorComponent({
         const handleResize = () => {
             if (containerRef.current && canvasRef.current && image) {
                 const containerWidth = containerRef.current.offsetWidth;
-                const imageHeight =
-                    (image.height / image.width) * containerWidth;
-                const canvas = canvasRef.current;
-                canvas.width = containerWidth;
-                canvas.height = imageHeight;
-                handleImageLoad();
+                const img = new Image();
+                img.src = image.src;
+                img.onload = () => {
+                    const imageHeight =
+                        (img.height / img.width) * containerWidth;
+                    const canvas = canvasRef.current;
+                    if (canvas) {
+                        canvas.width = containerWidth;
+                        canvas.height = imageHeight;
+                    }
+                    handleImageLoad();
+                };
             }
         };
 
@@ -79,8 +83,6 @@ export default function ImageAnnotatorComponent({
         };
     }, [image]);
 
-    
-
     return (
         <div>
             <input
@@ -88,27 +90,28 @@ export default function ImageAnnotatorComponent({
                 accept={supported_extensions.join(',')}
                 onChange={handleFileChange}
             />
-            <div ref={containerRef} className='relative'>
-                <canvas
-                    ref={canvasRef}
-                    width={800}
-                    height={600}
-                    style={{ border: '1px solid black' }}
-                ></canvas>
+            <div ref={containerRef} className="relative">
                 {image && (
-                    <img
-                        src={image.src}
-                        alt="Loaded Image"
-                        onLoad={handleImageLoad}
-                        style={{
-                            position: 'absolute',
-                            width: '100%',
-                            height: 'auto',
-                            top: 0,
-                            left: 0,
-                            visibility: 'hidden',
-                        }}
-                    />
+                    <>
+                        <canvas
+                            ref={canvasRef}
+                            width={800}
+                            height={600}
+                        ></canvas>
+                        <img
+                            src={image.src}
+                            alt="Loaded Image"
+                            onLoad={handleImageLoad}
+                            style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: 'auto',
+                                top: 0,
+                                left: 0,
+                                visibility: 'hidden',
+                            }}
+                        />
+                    </>
                 )}
             </div>
         </div>
