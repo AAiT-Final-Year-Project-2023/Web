@@ -16,13 +16,13 @@ export default function Dataset() {
       <section className="">
           <div className="">
               <Search/>
-              <h1 className="font-bold text-4xl mt-3 ml-4">Datasets</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <h1 className="font-bold text-4xl mt-3 mb-2">Datasets</h1>
+              <p className="f ml-5 mr-20 mb-10">The Datatsets are Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
                 
               <Filter/>
 
-              <h3 className="font-bold text-3xl ml-2 mb-4">Recently Viewed</h3>
+              <h3 className="font-semibold text-3xl ml-2 mb-4">Recently Viewed</h3>
             
             <div className="flex flex-col md:flex-row">
               <div className='flex w-full flex-nowrap'>
