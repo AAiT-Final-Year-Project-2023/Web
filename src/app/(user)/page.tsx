@@ -19,7 +19,7 @@ export default function Page() {
                 props={{
                     tags,
                     supportedExtensions,
-                    maxFileSize: 100_000,
+                    maxFileSize: 1_000_000,
                     initialAnnotations,
                     cb: getData,
                 }}
