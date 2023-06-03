@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect, useDebugValue } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export type ImageLabel = {
     id: number;
@@ -31,12 +31,13 @@ export default function ImageAnnotatorComponent({
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
     const [selectedTag, setSelectedTag] = useState<string>(tags[0]);
-    const [rectangles, setRectangles] = useState<ImageLabel[]>(
+    const [annotations, setAnnotations] = useState<ImageLabel[]>(
         initialAnnotations || [],
     );
     const [drawing, setDrawing] = useState<boolean>(false);
     const [startX, setStartX] = useState<number>(0);
     const [startY, setStartY] = useState<number>(0);
+    const colorsMapRef = useRef<Map<string, string>>(new Map());
 
     const tagColors = [
         '#fff100',
@@ -55,6 +56,7 @@ export default function ImageAnnotatorComponent({
     tags.forEach((tag, index) => {
         colorsMap.set(tag, tagColors[index]);
     });
+    colorsMapRef.current = colorsMap;
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -67,6 +69,7 @@ export default function ImageAnnotatorComponent({
         const handleResize = () => {
             if (containerRef.current && canvasRef.current && image) {
                 const containerWidth = containerRef.current.offsetWidth;
+                console.log(containerWidth);
                 const img = new Image();
                 img.src = image.src;
                 img.onload = () => {
@@ -84,40 +87,19 @@ export default function ImageAnnotatorComponent({
 
         handleResize();
 
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => {};
     }, [image]);
+
+    useEffect(() => {
+        handleImageLoad();
+    }, [annotations]);
 
     const handleImageLoad = () => {
         if (canvasRef.current && image) {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
             if (ctx) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-                rectangles.forEach((rectangle) => {
-                    if (rectangle.visible) {
-                        ctx.strokeStyle = rectangle.color;
-                        ctx.lineWidth = 2;
-                        ctx.fillStyle = rectangle.color;
-                        ctx.beginPath();
-                        ctx.rect(
-                            rectangle.x,
-                            rectangle.y,
-                            rectangle.width,
-                            rectangle.height,
-                        );
-                        ctx.stroke();
-                        ctx.fillText(
-                            rectangle.tag,
-                            rectangle.x,
-                            rectangle.y - 5,
-                        );
-                    }
-                });
+                drawAnnotations(ctx);
             }
         }
     };
@@ -170,6 +152,39 @@ export default function ImageAnnotatorComponent({
         return file.size < maxFileSize;
     };
 
+    const drawAnnotations = (ctx: CanvasRenderingContext2D) => {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(
+            image as HTMLImageElement,
+            0,
+            0,
+            ctx.canvas.width,
+            ctx.canvas.height,
+        );
+        annotations.forEach((annotation) => {
+            if (annotation.visible) {
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = annotation.color;
+                ctx.fillStyle = annotation.color;
+                ctx.beginPath();
+                ctx.rect(
+                    annotation.x,
+                    annotation.y,
+                    annotation.width,
+                    annotation.height,
+                );
+                ctx.closePath();
+                ctx.stroke();
+                ctx.font = '16px Arial';
+                ctx.fillText(
+                    `${annotation.id} - ${annotation.tag}`,
+                    annotation.x,
+                    annotation.y - 5,
+                );
+            }
+        });
+    };
+
     const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
         if (ctx) {
             setDrawing(true);
@@ -188,7 +203,8 @@ export default function ImageAnnotatorComponent({
 
             handleImageLoad();
 
-            ctx.strokeStyle = colorsMap.get(selectedTag) || fallbackColor;
+            ctx.strokeStyle =
+                colorsMapRef.current.get(selectedTag) || fallbackColor;
             ctx.lineWidth = 2;
             ctx.fillStyle = ctx.strokeStyle;
             ctx.beginPath();
@@ -206,20 +222,19 @@ export default function ImageAnnotatorComponent({
             const width = currentX - startX;
             const height = currentY - startY;
 
-            const rectangle: ImageLabel = {
-                id: rectangles.length + 1,
+            const annotation: ImageLabel = {
+                id: annotations.length + 1,
                 tag: selectedTag,
                 x: startX,
                 y: startY,
                 width,
                 height,
                 visible: true,
-                color: colorsMap.get(selectedTag) || fallbackColor,
+                color: colorsMapRef.current.get(selectedTag) || fallbackColor,
             };
 
-            setRectangles([...rectangles, rectangle]);
+            setAnnotations([...annotations, annotation]);
             setDrawing(false);
-            console.log(rectangles);
         }
     };
 
@@ -227,56 +242,129 @@ export default function ImageAnnotatorComponent({
         setSelectedTag(e.target.value);
     };
 
+    const handleAnnotationShowHide = (id: number) => {
+        setAnnotations((prevAnnotations) =>
+            prevAnnotations.map((annotation) =>
+                annotation.id === id
+                    ? { ...annotation, visible: !annotation.visible }
+                    : annotation,
+            ),
+        );
+    };
+
+    const handleAnnotationDelete = (id: number) => {
+        setAnnotations((prevAnnotations) =>
+            prevAnnotations.filter((annotation) => annotation.id !== id),
+        );
+    };
+
+    const handleSubmit = () => {
+        cb(annotations);
+    };
+
     return (
-        <div>
+        <div className="">
             <input
                 type="file"
                 accept={supportedExtensions.join(',')}
                 onChange={handleFileChange}
             />
-            <div ref={containerRef} className="relative">
-                <canvas
-                    ref={canvasRef}
-                    width={0}
-                    height={0}
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                    onMouseOut={handleMouseUp}
-                    style={{
-                        cursor: 'crosshair',
-                    }}
-                ></canvas>
-                {image && (
-                    <img
-                        src={image.src}
-                        alt="Loaded Image"
-                        onLoad={handleImageLoad}
+            <div className="my-3 flex flex-wrap items-start gap-4">
+                <div ref={containerRef} className="relative max-w-max">
+                    <canvas
+                        ref={canvasRef}
+                        width={0}
+                        height={0}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseOut={handleMouseUp}
                         style={{
-                            position: 'absolute',
-                            width: '100%',
-                            height: 'auto',
-                            top: 0,
-                            left: 0,
-                            visibility: 'hidden',
+                            cursor: 'crosshair',
                         }}
-                    />
-                )}
+                    ></canvas>
+                    {image && (
+                        <img
+                            src={image.src}
+                            alt="Loaded Image"
+                            onLoad={handleImageLoad}
+                            style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: 'auto',
+                                top: 0,
+                                left: 0,
+                                visibility: 'hidden',
+                            }}
+                        />
+                    )}
+                </div>
+                {annotations.length > 0 && (
+                    <div className="w-max shadow-lg">
+                        <div className="bg-neutral-100 p-3 text-center text-lg">
+                            Tags {'('}
+                            {annotations.length}
+                            {')'}
+                        </div>
+                        <div className="max-h-60 overflow-auto px-4 py-3">
+                            {annotations.map((rectangle) => (
+                                <div
+                                    key={rectangle.id}
+                                    className="border-b-gray-4=300 m-1 flex items-center justify-evenly gap-5 border-b py-3"
+                                >
+                                    <p>{rectangle.id}</p>
+                                    <p>{rectangle.tag}</p>
+                                    <button
+                                        className="rounded-md bg-gray-100 px-3 py-1 font-semibold"
+                                        onClick={() =>
+                                            handleAnnotationShowHide(
+                                                rectangle.id,
+                                            )
+                                        }
+                                    >
+                                        {rectangle.visible ? 'hide' : 'show'}
+                                    </button>
+                                    <button
+                                        className="rounded-md bg-red-600 px-3 py-1 font-semibold text-white"
+                                        onClick={() =>
+                                            handleAnnotationDelete(rectangle.id)
+                                        }
+                                    >
+                                        delete
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}{' '}
             </div>
-            <div>
-                <label htmlFor="tag-select">Select Tag:</label>
-                <select
-                    id="tag-select"
-                    value={selectedTag}
-                    onChange={handleTagChange}
-                >
-                    {tags.map((tag) => (
-                        <option key={tag} value={tag}>
-                            {tag}
-                        </option>
-                    ))}
-                </select>
+            {/* {image && ( */}
+            <div className="flex flex-wrap items-center justify-between p-7">
+                <div>
+                    <label htmlFor="tag-select">Select Tag: </label>
+                    <select
+                        id="tag-select"
+                        value={selectedTag}
+                        onChange={handleTagChange}
+                        className="bg-gray-100 p-3"
+                    >
+                        {tags.map((tag) => (
+                            <option key={tag} value={tag}>
+                                {tag}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <button
+                        onClick={handleSubmit}
+                        className="rounded-md bg-green-500 p-3 font-bold text-white"
+                    >
+                        Submit
+                    </button>
+                </div>
             </div>
+            {/* )} */}
         </div>
     );
 }
