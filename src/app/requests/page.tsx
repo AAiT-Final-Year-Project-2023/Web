@@ -15,14 +15,13 @@ export default function Requests() {
       <section className="">
           <div className="">
           <Search/>
-              <h1 className="font-bold text-4xl ml-2">Requests</h1>
-              <p className="mb-4">loream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream 
-    episom loream episomloream episom loream episom</p>
+          <h1 className="font-bold text-4xl mt-3 mb-2">Requests</h1>
+              <p className="font-light ml-5 mr-20 mb-10">The Requests are Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
+                
+              <Filter/>
 
-    <Filter/>
-
-
-<div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
+<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
     <div className="md:flex">
         <div className="md:shrink-0">
             <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnjiLxl1lHrBI3-W4QqXz8RqkQmSTbcOBrBQ&usqp=CAU" />
