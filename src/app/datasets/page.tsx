@@ -6,9 +6,6 @@ import Filter from "../searchsort/page"
 export default function Dataset() {
   return (
     <div>
-      <head>
-        <title>Data Shelf</title>
-      </head>
       <div className="flex w-full"
       >
       <div className='w-1/4 ml-3'><Sidebar/></div>
@@ -21,6 +18,78 @@ export default function Dataset() {
                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
                 
               <Filter/>
+              <div className="bg-white rounded shadow-md p-4">
+      <div className="flex">
+        <div className="w-1/4">
+          <img
+            className="object-cover rounded"
+            src="path_to_your_image"
+            alt="Image"
+          />
+        </div>
+        <div className="w-1/2 px-4">
+          <h2 className="text-xl font-bold mb-2">Title</h2>
+          <p className="text-gray-600 mb-4">
+            Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <div className="flex items-center mb-2">
+            <button className="mr-2 text-blue-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+            </button>
+            <button className="mr-2 text-red-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <a
+              href="path_to_your_file"
+              download
+              className="text-blue-500 flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+              <span className="ml-1">Download</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
               <h3 className="font-semibold text-3xl ml-2 mb-4">Recently Viewed</h3>
             

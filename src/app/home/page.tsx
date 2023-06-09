@@ -39,7 +39,7 @@ const Home = () => {
           <p className="text-gray-600">Datasets</p>
         </div>
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-blue-500">{contributions}%</h2>
+          <h2 className="text-3xl font-bold text-blue-500">{contributions}</h2>
           <p className="text-gray-600">Contribution</p>
         </div>
       </div>
@@ -48,7 +48,7 @@ const Home = () => {
 
 
 
-              <h3 className='font-semibold text-3xl'>Datasets</h3>
+              <h3 className='font-semibold text-3xl justify-center'>Datasets</h3>
             
               <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
                     <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
