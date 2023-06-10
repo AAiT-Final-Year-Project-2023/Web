@@ -2,7 +2,7 @@ import Sidebar from "../sidebar/page"
 import Footer from "../footer/page"
 import Search from "../navsearchprofile/page"
 
-export default function DatasetDetail() {
+const DatasetDetail = () =>  {
   return (
     <div>
       <div className="flex w-full">
@@ -17,21 +17,22 @@ export default function DatasetDetail() {
                   <p className="text-gray-700">This data is about Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
-                  <h1 className="font-bold text-xl mb-5 mt-5">Video type</h1>
+                  <h1 className="font-bold text-xl mb-5 mt-5">Data type</h1>
+                  <h1>Video</h1>
                   <div>
                     <h1 className="font-bold text-xl">Lablings</h1>
-                    <li className="ml-3">fistlabling</li>
-                    <li className="ml-3">secondlabling</li>
-                    <li className="ml-3">third labling</li>
+                    <li className="ml-3">Labling1</li>
+                    <li className="ml-3">Labling2</li>
+                    <li className="ml-3">Labling3</li>
                   </div>
                   </div>
 
                 <div className="col-span-1 mt-16 ml-5">
-                  <h1 className="font-bold text-xl ">Amount</h1>
+                  <h1 className="font-bold text-xl ">Amount needed</h1>
                   <h1 className="mb-5">300 Datas</h1>
                   <h1 className="font-bold text-xl">Data Size</h1>
                   <h1 className="mb-5">20mb</h1>
-                  <h1 className="font-bold text-xl mb-5">Public</h1>
+                  <h1 className="font-bold text-xl mb-5">Private</h1>
                   <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mt-6">
                   <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                   <span>Download</span>
@@ -47,3 +48,5 @@ export default function DatasetDetail() {
     </div>
   )
 }
+
+export default DatasetDetail;
