@@ -13,11 +13,11 @@ const DatasetDetail = () =>  {
 
               <div className="grid grid-cols-3 gap-3 sm:grid-cols-3">
                 <div className="col-span-2">
-                  <h1 className="font-bold text-xl">Content</h1>
+                  <h1 className="font-bold text-xl">Description</h1>
                   <p className="text-gray-700">This data is about Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
-                  <h1 className="font-bold text-xl mb-5 mt-5">Data type</h1>
+                  <h1 className="font-bold text-xl mt-5">Data type</h1>
                   <h1>Video</h1>
                   <div>
                     <h1 className="font-bold text-xl">Lablings</h1>

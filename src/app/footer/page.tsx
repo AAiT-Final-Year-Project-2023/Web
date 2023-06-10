@@ -9,7 +9,7 @@ export default function footer(){
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
               <a href="/home" className="flex items-center">
-                  <span className="self-center text-2xl text-blue-700 font-bold whitespace-nowrap dark:text-white">Data Shelf</span>
+                  <span className="text-blue-500 font-extrabold text-4xl">Data Shelf</span>
               </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -17,7 +17,7 @@ export default function footer(){
                   <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Products</h2>
                   <ul className="text-gray-600 dark:text-gray-400 font-medium">
                       <li className="mb-4">
-                          <a href="/home" className="hover:underline">Data Shelf</a>
+                          <a href="/home" className="hover:underline ">Data Shelf</a>
                       </li>
                       <li>
                           <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>

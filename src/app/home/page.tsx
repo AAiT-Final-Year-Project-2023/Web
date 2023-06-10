@@ -40,7 +40,7 @@ const Home = () => {
         </div>
         <div className="text-center">
           <h2 className="text-3xl font-bold text-blue-500">{contributions}</h2>
-          <p className="text-gray-600">Contribution</p>
+          <p className="text-gray-600">Contributions</p>
         </div>
       </div>
     </div>
