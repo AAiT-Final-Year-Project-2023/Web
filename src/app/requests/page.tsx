@@ -6,26 +6,24 @@ import Filter from "../searchsort/page"
 export default function Requests() {
   return (
     <div>
-      <head>
-        <title>Data Shelf</title>
-      </head>
       <div className="flex w-full">
       <div className='w-1/4 ml-3'><Sidebar/></div>
       <div className='w-3/4'>
-      <section className="">
-          <div className="">
-          <Search/>
-          <h1 className="font-bold text-4xl mt-3 mb-2">Requests</h1>
+      <div className="grid grid-cols-1 gap-7 sm:grid-cols-7 mt-4">
+          <h1 className="col-span-4 font-bold text-4xl mt-3 mb-2 ">Requests</h1>
+          <a className="col-span-3 flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="/create_request">
+            <button type="button" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              + New Requests
+            </button>
+          </a>
+        </div>
               <p className="font-light ml-5 mr-20 mb-10">The Requests are Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
                 
               <Filter/>
 
-<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
+<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-3 mb-5 ml-16">
     <div className="md:flex">
-        <div className="md:shrink-0">
-            <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnjiLxl1lHrBI3-W4QqXz8RqkQmSTbcOBrBQ&usqp=CAU" />
-        </div>
         <div className="p-8">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Flowers</div>
             <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible
@@ -47,11 +45,8 @@ export default function Requests() {
     </div>
 </div>
 
-<div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
+<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-5 ml-16">
     <div className="md:flex">
-        <div className="md:shrink-0">
-            <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://loremflickr.com/g/320/240/team" />
-        </div>
         <div className="p-8">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Company retreats</div>
             <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible
@@ -73,11 +68,8 @@ export default function Requests() {
     </div>
 </div>
 
-<div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
+<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-5 ml-16">
     <div className="md:flex">
-        <div className="md:shrink-0">
-            <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTBWsNFeXpY3KPGzX350RaxfqfuiS29tnLXA&usqp=CAU" />
-        </div>
         <div className="p-8">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Company retreats</div>
             <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible
@@ -99,11 +91,8 @@ export default function Requests() {
     </div>
 </div>
 
-<div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-3">
+<div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-5 ml-16">
     <div className="md:flex">
-        <div className="md:shrink-0">
-            <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://loremflickr.com/g/320/240/team" />
-        </div>
         <div className="p-8">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Company retreats</div>
             <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible
@@ -124,11 +113,47 @@ export default function Requests() {
         </div>
     </div>
 </div>
+
+        
+<nav aria-label="Page navigation example">
+    <ul className="mt-10 list-style-none flex justify-center text-blue-500">
+      <li>
+        <a
+          className="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-blue-500 transition-all duration-300 dark:text-neutral-400"
+          >Previous</a>
+      </li>
+      <li>
+        <a
+          className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+          href="#!"
+          >1</a>
+      </li>
+      <li aria-current="page">
+        <a
+          className="relative block rounded bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-all duration-300"
+          href="#!"
+          >2
+          <span className="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
+            >(current)</span>
+        </a>
+      </li>
+      <li>
+        <a
+          className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+          href="#!"
+          >3</a>
+      </li>
+      <li>
+        <a
+          className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-blue-500 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+          href="#!"
+          >Next</a>
+      </li>
+    </ul>
+  </nav>
+
 
             </div>
-          </section>
-      
-      </div>
       </div> 
       <Footer/>
     </div>

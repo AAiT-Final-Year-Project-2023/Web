@@ -10,303 +10,134 @@ export default function Dataset() {
       >
       <div className='w-1/4 ml-3'><Sidebar/></div>
       <div className='w-3/4'>
-      <section className="">
-          <div className="">
-              <Search/>
-              <h1 className="font-bold text-4xl mt-3 mb-2">Datasets</h1>
-              <p className="font-light ml-5 mr-20 mb-10">The Datatsets are Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
-                
-              <Filter/>
-              <div className="bg-white rounded shadow-md p-4">
-      <div className="flex">
-        <div className="w-1/4">
-          <img
-            className="object-cover rounded"
-            src="path_to_your_image"
-            alt="Image"
-          />
-        </div>
-        <div className="w-1/2 px-4">
-          <h2 className="text-xl font-bold mb-2">Title</h2>
-          <p className="text-gray-600 mb-4">
-            Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-          <div className="flex items-center mb-2">
-            <button className="mr-2 text-blue-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 15l7-7 7 7"
-                />
-              </svg>
-            </button>
-            <button className="mr-2 text-red-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-            <a
-              href="path_to_your_file"
-              download
-              className="text-blue-500 flex items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              <span className="ml-1">Download</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+        <h1 className="font-bold text-4xl mt-3 mb-2">Datasets</h1>
+        <Filter/>
+              
+        <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-indigo-500">Title 1 UI</span>
+                          Completely unstyled, fully accessible UI components</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind
+                              CSS.</p>
+                      </div><a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/details_dataset">
+                          more<span className="sr-only">, Completely unstyled, fully accessible UI components</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg>
+                          </a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640" />
+              </li>
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
+                          icons, by the makers of Tailwind CSS.</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>A set of 450+ free MIT-licensed SVG icons. Available as basic SVG icons and via first-party React and
+                              Vue libraries.</p>
+                      </div><a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/dataset_detail">more
+                          <span className="sr-only">, Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg></a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/heroicons@75.4a558f35.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+              </li>
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
+                          patterns by the makers of Tailwind CSS.</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>A collection of over 100 free MIT-licensed high-quality SVG patterns for you to use in your web
+                              projects.</p>
+                      </div><a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/dataset_detail">
+                          more<span className="sr-only">, Seamless SVG background patterns by the makers of Tailwind CSS.</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg></a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/heropatterns@75.82a09697.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+              </li>
+          </ul>
 
-              <h3 className="font-semibold text-3xl ml-2 mb-4">Recently Viewed</h3>
-            
-            <div className="flex flex-col md:flex-row">
-              <div className='flex w-full flex-nowrap'>
-                <div className="w-full grow items-center h-screen mr-4">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-2xl mb-2">The Coldest Sunset</div>
-                    <h1 className="text-xl font-semibold mb-2">Jhon David</h1>
-                    <p className="text-gray-700 text-base">JSON Dataset | 1k datas</p>
-                  </div>
-                </div>
-                </div>
+          <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-indigo-500">Title 1 UI</span>Completely unstyled, fully
+                          accessible UI components</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind
+                              CSS.</p>
+                      </div><a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/details_dataset">
+                          more<span className="sr-only">, Completely unstyled, fully accessible UI components</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg></a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640" />
+              </li>
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
+                          icons, by the makers of Tailwind CSS.</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>A set of 450+ free MIT-licensed SVG icons. Available as basic SVG icons and via first-party React and
+                              Vue libraries.</p>
+                      </div><a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/dataset_detail">more
+                          <span className="sr-only">, Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg></a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/heroicons@75.4a558f35.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+              </li>
 
-                <div className="w-full grow items-center h-screen mr-4">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-2xl mb-2">The Coldest Sunset</div>
-                    <h1 className="text-xl font-semibold mb-2">Jhon David</h1>
-                    <p className="text-gray-700 text-base">JSON Dataset | 1k datas</p>
-                  </div>
-                </div>
-                </div>
-
-                <div className="w-full grow items-center h-screen mr-4">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-2xl mb-2">The Coldest Sunset</div>
-                    <h1 className="text-xl font-semibold mb-2">Jhon David</h1>
-                    <p className="text-gray-700 text-base">JSON Dataset | 1k datas</p>
-                  </div>
-                </div>
-                </div>
-
-              </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row">
-              <div className='flex w-full flex-nowrap'>
-                <div className="w-full grow items-center h-screen mr-4 ">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-                <div className="w-full grow items-center h-screen mr-4">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-                <div className="w-full grow items-center h-screen">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-              </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row">
-              <div className='flex w-full flex-nowrap'>
-                <div className="w-full grow items-center h-screen mr-4 ">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-                <div className="w-full grow items-center h-screen mr-4">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-                <div className="w-full grow items-center h-screen">
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Sunset in the mountains" />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p className="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                  </div>
-                  <div className="px-6 py-4">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                      #photography
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>
-                  </div>
-                </div>
-                </div>
-
-              </div>
-              </div>
-    
-
-              <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-    
-    <div className="rounded overflow-hidden shadow-lg">
-      <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Mountain"/>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">Mountain</div>
-        <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-        </p>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-      </div>
-    </div>
-    
-    <div className="rounded overflow-hidden shadow-lg">
-      <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="River"/>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">River</div>
-        <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-        </p>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#summer</span>
-      </div>
-    </div>
-
-    
-    <div className="rounded overflow-hidden shadow-lg">
-      <img className="w-full" src="https://source.unsplash.com/random/1600x900" alt="Forest"/>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">Forest</div>
-        <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
-        </p>
-      </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#fall</span>
-      </div>
-    </div>
-  </div>
+              <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                  <div className="order-1 sm:ml-6 xl:ml-0">
+                      <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
+                          <span className="mb-1 block text-sm leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
+                          patterns by the makers of Tailwind CSS.</h3>
+                      <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
+                          <p>A collection of over 100 free MIT-licensed high-quality SVG patterns for you to use in your web
+                              projects.</p>
+                      </div>
+                      <a
+                          className="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:ring-slate-500 mt-6"
+                          href="/dataset_detail">
+                          more<span className="sr-only">, Seamless SVG background patterns by the makers of Tailwind CSS.</span><svg
+                              className="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400 dark:text-slate-500 dark:group-hover:text-slate-400"
+                              width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M0 0L3 3L0 6"></path>
+                          </svg></a>
+                  </div><img src="https://tailwindcss.com/_next/static/media/heropatterns@75.82a09697.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+              </li>
+          </ul>
 
   <nav aria-label="Page navigation example">
-    <ul className="list-style-none flex justify-center text-blue-500">
+    <ul className="mt-10 list-style-none flex justify-center text-blue-500">
       <li>
         <a
           className="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-blue-500 transition-all duration-300 dark:text-neutral-400"
@@ -345,9 +176,6 @@ export default function Dataset() {
 
 
             </div>
-          </section>
-      
-      </div>
       </div> 
       <Footer/>
     </div>
