@@ -8,7 +8,7 @@ const Contribution = () =>{
         <div className='w-1/4 ml-3'><Sidebar/></div>
 
         <div className='w-3/4'>
-          <h1>Contribute Verification Table</h1>
+          <h1 className="text-4xl font-bold mb-5 mt-10 ml-5">Contribute Verification</h1>
           <div className="flex flex-col overflow-x-auto">
   <div className="sm:-mx-6 lg:-mx-8">
     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -31,7 +31,7 @@ const Contribution = () =>{
               <td className="whitespace-nowrap px-6 py-4">2mb</td>
               <td className="whitespace-nowrap px-6 py-4">06/10/2023</td>
               <td className="whitespace-nowrap px-6 py-4">Pending</td>
-              <td className="whitespace-nowrap px-6 py-4"><button> <a href="./data_viewer_page">Verify</a></button></td>
+              <td className="whitespace-nowrap px-6 py-4"><button className="p-2 mr-5 font-bold text-sl border-success bg-green-500 text-black-400"> <a href="./data_viewer_page">Verify</a></button></td>
             </tr>
             <tr className="border-b dark:border-neutral-500">
               <td className="whitespace-nowrap px-6 py-4">File2</td>

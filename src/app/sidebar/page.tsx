@@ -41,7 +41,7 @@ export default function sidebar(){
                 <span className="text-sm font-medium">Requests</span>
               </a>
 
-              <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-orange-200 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-orange-700" href="/mycontributions">
+              <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-orange-200 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-orange-700" href="/contributions">
                 <span className="mx-2 text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-blue-700">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
                   </svg></span>

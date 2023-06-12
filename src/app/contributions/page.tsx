@@ -9,9 +9,7 @@ const Contribution = ()=> {
       <div className='w-1/4 ml-3'><Sidebar/></div>
       <div className='w-3/4'>
           <Search/>
-              <h1 className="font-bold text-4xl italic mt-8 mb-5">Contributions</h1>
-              <p className="mb-5">loream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream episomloream episom loream 
-    episom loream episomloream episom loream episom</p>
+              <h1 className="font-bold text-4xl mt-8 mb-5">Contributions</h1>
 
     <div className="bg-white overflow-auto">
                         <table className="min-w-full bg-white">
@@ -36,7 +34,7 @@ const Contribution = ()=> {
                                     <td className="text-left py-3 px-4">40birr</td>
                                 </tr>
                                 <tr className="bg-gray-200">
-                                    <td className="text-left py-3 px-4">MyFile1</td>
+                                    <td className="text-left py-3 px-4">MyFile2</td>
                                     <td className="text-left py-3 px-4">Flower</td>
                                     <td className="text-left py-3 px-4">Text</td>
                                     <td className="text-left py-3 px-4">06.09.2023</td>
@@ -44,7 +42,7 @@ const Contribution = ()=> {
                                     <td className="text-left py-3 px-4">40birr</td>
                                 </tr>
                                 <tr>
-                                    <td className="text-left py-3 px-4">MyFile1</td>
+                                    <td className="text-left py-3 px-4">MyFile3</td>
                                     <td className="text-left py-3 px-4">Flower</td>
                                     <td className="text-left py-3 px-4">Image</td>
                                     <td className="text-left py-3 px-4">06.09.2023</td>
@@ -52,23 +50,15 @@ const Contribution = ()=> {
                                     <td className="text-left py-3 px-4">40birr</td>
                                 </tr>
                                 <tr className="bg-gray-200">
-                                    <td className="text-left py-3 px-4">MyFile1</td>
+                                    <td className="text-left py-3 px-4">MyFile4</td>
                                     <td className="text-left py-3 px-4">Flower</td>
                                     <td className="text-left py-3 px-4">Video</td>
                                     <td className="text-left py-3 px-4">06.09.2023</td>
                                     <td className="text-left py-3 px-4">Accepted</td>
                                     <td className="text-left py-3 px-4">40birr</td>
                                 </tr>
-                                <tr className="bg-gray-200">
-                                    <td className="text-left py-3 px-4">MyFile1</td>
-                                    <td className="text-left py-3 px-4">Flower</td>
-                                    <td className="text-left py-3 px-4">Text</td>
-                                    <td className="text-left py-3 px-4">06.09.2023</td>
-                                    <td className="text-left py-3 px-4">Accepted</td>
-                                    <td className="text-left py-3 px-4">40birr</td>
-                                </tr>
                                 <tr>
-                                    <td className="text-left py-3 px-4">MyFile1</td>
+                                    <td className="text-left py-3 px-4">MyFile5</td>
                                     <td className="text-left py-3 px-4">Flower</td>
                                     <td className="text-left py-3 px-4">Image</td>
                                     <td className="text-left py-3 px-4">06.09.2023</td>
@@ -76,7 +66,7 @@ const Contribution = ()=> {
                                     <td className="text-left py-3 px-4">40birr</td>
                                 </tr>
                                 <tr className="bg-gray-200">
-                                    <td className="text-left py-3 px-4">MyFile1</td>
+                                    <td className="text-left py-3 px-4">MyFile6</td>
                                     <td className="text-left py-3 px-4">Flower</td>
                                     <td className="text-left py-3 px-4">Video</td>
                                     <td className="text-left py-3 px-4">06.09.2023</td>

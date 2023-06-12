@@ -13,8 +13,8 @@ const CreateRequest = () =>  {
         <h1 className="ml-20 mb-10 text-xl font-semibold">Select Payment Plan</h1>
       <div className="flex r">
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-gray-200 text-green-500 p-4 ml-10">Free</div>
-        <div className="bg-gray-200 text-black-500 p-4 ml-10">Pro</div>
+        <div className="bg-gray-200 font-bold text-black-500 p-4 ml-10 text-center"> <button>Free <h1 className="mt-3 text-sm font-light">2GB - Disk size </h1><h1 className="text-sm font-light">No Price</h1></button></div>
+        <div className="bg-gray-200 font-bold text-black-500 p-4 ml-10"><button >Premium <h1 className="mt-3 text-sm font-light">For users who wants larger storage</h1><h1 className="text-sm font-light">10GB</h1><h1 className="text-sm font-light">10,000 - Price</h1></button></div>
       </div>
 </div>
 

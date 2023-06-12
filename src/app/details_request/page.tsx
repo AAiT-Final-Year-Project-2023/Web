@@ -45,9 +45,6 @@ const RequestDetail = () =>  {
                 Contribute
             </button>
 
-              <div className="justify-center">
-                <a className="ml-80 justify-center bg-gradient-to-b text-blue-500 font-semiboldpx-10 py-3 rounded-2xl shadow-md border-b-4 hover hover:shadow-sm transition-all duration-500 text-2xl" href="/verify_contribute">Contribute</a>
-              </div>
 
       
       </div>

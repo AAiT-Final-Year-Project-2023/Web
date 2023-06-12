@@ -17,9 +17,6 @@ export default function Requests() {
             </button>
           </a>
         </div>
-              <p className="font-light ml-5 mr-20 mb-10">The Requests are Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo</p>
-                
               <Filter/>
 
 <div className="max-w-md bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-3 mb-5 ml-16">
