@@ -1,4 +1,5 @@
 'use client';
+import { tagColors } from '@/common/constants';
 import { useRef, useState } from 'react';
 import { AnnotateTag, TextAnnotateBlend } from 'react-text-annotate-blend';
 
@@ -20,21 +21,10 @@ export default function TextAnnotatorComponent({
     const [text, setText] = useState('');
     const message = useRef<HTMLDivElement>(null);
 
-    const COLORS: string[] = [
-        '#6fff00',
-        '#00ffbb',
-        '#cf4444',
-        '#f7980a',
-        '#fbff0d',
-        '#00eaff',
-        '#008cff',
-        '#1500ff',
-        '#ff00ee',
-    ];
-    const tagColor = new Map();
+    const tagColor = new Map<string, string>();
 
     tags.forEach((tag, index) => {
-        tagColor.set(tag, COLORS[index]);
+        tagColor.set(tag, tagColors[index]);
     });
 
     const handleAnnotationChange = (value: any) => {

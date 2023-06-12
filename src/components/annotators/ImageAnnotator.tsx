@@ -1,16 +1,11 @@
 'use client';
+import { tagColors } from '@/common/constants';
+import {
+    isSupportedFileExtension,
+    isSupportedFileSize,
+} from '@/common/functions';
+import { ImageLabel } from '@/common/types';
 import React, { useState, useRef, useEffect } from 'react';
-
-export type ImageLabel = {
-    id: number;
-    tag: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    visible: boolean;
-    color: string;
-};
 
 export default function ImageAnnotatorComponent({
     props,
@@ -39,18 +34,6 @@ export default function ImageAnnotatorComponent({
     const [startY, setStartY] = useState<number>(0);
     const colorsMapRef = useRef<Map<string, string>>(new Map());
 
-    const tagColors = [
-        '#fff100',
-        '#ff8c00',
-        '#e81123',
-        '#ec008c',
-        '#68217a',
-        '#00188f',
-        '#00bcf2',
-        '#00b294',
-        '#009e49',
-        '#bad80a',
-    ];
     const fallbackColor = '#fff100';
     const colorsMap = new Map<string, string>();
     tags.forEach((tag, index) => {
@@ -126,30 +109,6 @@ export default function ImageAnnotatorComponent({
             };
             img.src = URL.createObjectURL(file);
         }
-    };
-
-    const isSupportedFileExtension = (
-        file: File,
-        fileType: string,
-        supportedExtensions: string[],
-    ): boolean => {
-        let fileTypeExtension = file.type.split('/');
-        const [currFileType, currFileExtension] = fileTypeExtension;
-        if (currFileType && currFileType === fileType) {
-            return true;
-        }
-
-        if (
-            currFileExtension &&
-            supportedExtensions.includes(currFileExtension)
-        ) {
-            return true;
-        }
-        return false;
-    };
-
-    const isSupportedFileSize = (file: File, maxFileSize: number): boolean => {
-        return file.size < maxFileSize;
     };
 
     const drawAnnotations = (ctx: CanvasRenderingContext2D) => {
@@ -266,7 +225,9 @@ export default function ImageAnnotatorComponent({
         <div className="">
             <input
                 type="file"
-                accept={supportedExtensions.join(',')}
+                accept={supportedExtensions
+                    .map((ext) => `image/${ext}`)
+                    .join(',')}
                 onChange={handleFileChange}
             />
             <div className="my-3 flex flex-wrap items-start gap-4">
@@ -310,7 +271,7 @@ export default function ImageAnnotatorComponent({
                             {annotations.map((rectangle) => (
                                 <div
                                     key={rectangle.id}
-                                    className="border-b-gray-4=300 m-1 flex items-center justify-evenly gap-5 border-b py-3"
+                                    className="m-1 flex items-center justify-evenly gap-5 border-b border-b-gray-300 py-3"
                                 >
                                     <p>{rectangle.id}</p>
                                     <p>{rectangle.tag}</p>

@@ -1,13 +1,26 @@
 'use client';
-import ImageAnnotatorComponent, {
-    ImageLabel,
-} from '@/components/annotators/ImageAnnotator';
+import AudioAnnotatorComponent from '@/components/annotators/AudioAnnotator';
+import { AudioLabel } from '@/common/types';
 
 export default function Page() {
     const tags = ['dog', 'cat', 'die'];
-    const supportedExtensions = ['png', 'jpg'];
-    const initialAnnotations = new Array<ImageLabel>();
-    const getData = (data: ImageLabel[]) => {
+    const supportedExtensions = ['mp3', 'x-flac'];
+    const initialAnnotations = new Array<AudioLabel>();
+    initialAnnotations.push({
+        id: 1,
+        startTime: 4,
+        endTime: 8,
+        tag: tags[0],
+    });
+
+    initialAnnotations.push({
+        id: 2,
+        startTime: 9,
+        endTime: 23,
+        tag: tags[1],
+    });
+
+    const getData = (data: AudioLabel[]) => {
         console.log(data);
     };
 
@@ -15,11 +28,20 @@ export default function Page() {
         <main className="">
             <h1>Landing Page</h1>
             {/* <VideoAnnotatorComponent /> */}
-            <ImageAnnotatorComponent
+            {/* <ImageAnnotatorComponent
                 props={{
                     tags,
                     supportedExtensions,
                     maxFileSize: 1_000_000,
+                    initialAnnotations,
+                    cb: getData,
+                }}
+            /> */}
+            <AudioAnnotatorComponent
+                props={{
+                    tags,
+                    supportedExtensions,
+                    maxFileSize: 1_000_000_000,
                     initialAnnotations,
                     cb: getData,
                 }}
