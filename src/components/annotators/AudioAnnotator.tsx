@@ -9,10 +9,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import { MdVolumeOff, MdVolumeUp, MdZoomIn } from 'react-icons/md';
 import WaveSurfer from 'wavesurfer.js';
-import RegionsPlugin, {
-    Region,
-    RegionsPluginOptions,
-} from 'wavesurfer.js/dist/plugins/regions';
+import RegionsPlugin, { Region } from 'wavesurfer.js/dist/plugins/regions';
 
 type AudioAnnotation = {
     color: string;
@@ -116,11 +113,6 @@ export default function AudioAnnotatorComponent({
 
         wavesurferRegions.current?.on('region-updated', regionUpdatedHandler);
 
-        // wavesurferRegions.current.on(
-        //     'region-created',
-        //     regionCreatedHandler,
-        // );
-
         wavesurfer.current.on('audioprocess', (currTime: number) => {
             if (currentTimeRef.current)
                 currentTimeRef.current.innerHTML = formatDuration(currTime);
@@ -176,18 +168,6 @@ export default function AudioAnnotatorComponent({
         }
     }, [zoom]);
 
-    const regionCreatedHandler = (region: Region) => {
-        const newRegion: AudioAnnotation = {
-            id: annotations.length + 1,
-            startTime: region.start,
-            endTime: region.end,
-            color: colorsMap.get(selectedTag) || fallbackColor,
-            tag: selectedTag,
-            visible: true,
-        };
-        setAnnotations([...annotations, newRegion]);
-    };
-
     const regionUpdatedHandler = (region: Region) => {
         let updatedRegion: AudioAnnotation = annotations.filter(
             (annotation) => annotation.id.toString() === region.id,
@@ -209,6 +189,33 @@ export default function AudioAnnotatorComponent({
         });
     };
 
+    const handleAddRegion = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (wavesurfer.current) {
+            const currentTime = wavesurfer.current?.getCurrentTime();
+            const duration = wavesurfer.current?.getDuration();
+            let start = currentTime;
+            let end = currentTime;
+
+            if (currentTime - 5 > 0) {
+                start = currentTime - 5;
+            }
+
+            if (currentTime + 5 < duration) {
+                end = currentTime + 5;
+            }
+
+            const newRegion: AudioAnnotation = {
+                id: annotations.length + 1,
+                startTime: start,
+                endTime: end,
+                color: colorsMap.get(selectedTag) || fallbackColor,
+                tag: selectedTag,
+                visible: true,
+            };
+            setAnnotations([...annotations, newRegion]);
+        }
+    };
+
     const handleVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const volume = parseInt(e.target.value);
         setVolume(volume);
@@ -225,7 +232,7 @@ export default function AudioAnnotatorComponent({
         });
     };
 
-    const handleTagChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleTagChange = (e: ChangeEvent<HTMLSelectElement>) => {
         if (wavesurferRegions.current)
             wavesurferRegions.current.enableDragSelection({
                 color: colorsMap.get(e.target.value),
@@ -282,21 +289,32 @@ export default function AudioAnnotatorComponent({
                     onChange={handleFileChange}
                 />
 
-                <div>
-                    <label htmlFor="tag-select">Tag: </label>
-                    <select
-                        id="tag-select"
-                        value={selectedTag}
-                        onChange={handleTagChange}
-                        className="bg-gray-100 p-3"
-                    >
-                        {tags.map((tag) => (
-                            <option key={tag} value={tag}>
-                                {tag}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                {wavesurfer.current && (
+                    <div className="flex items-center justify-start gap-4">
+                        <div>
+                            <label htmlFor="tag-select">Tag: </label>
+                            <select
+                                id="tag-select"
+                                value={selectedTag}
+                                onChange={handleTagChange}
+                                className="bg-gray-100 p-3"
+                            >
+                                {tags.map((tag) => (
+                                    <option key={tag} value={tag}>
+                                        {tag}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <button
+                            className="block rounded-md bg-green-600 px-4 py-3 font-semibold text-white"
+                            onClick={handleAddRegion}
+                        >
+                            Add New Annotation
+                        </button>
+                    </div>
+                )}
             </div>
             <div ref={wavesurferContainer} />
             {audioFile && wavesurfer.current ? (
