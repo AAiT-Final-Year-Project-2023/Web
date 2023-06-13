@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
-import Logo from './logo'
-
 export default function Header() {
 
   const [top, setTop] = useState<boolean>(true)
@@ -27,7 +25,8 @@ export default function Header() {
 
           {/* Site branding */}
           <div className="shrink-0 mr-4">
-            <Logo />
+          <a href="/" className='text-blue-500 font-extrabold text-4xl'>Data Shelf
+  </a>
           </div>
 
           {/* Desktop navigation */}

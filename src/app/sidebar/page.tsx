@@ -1,9 +1,8 @@
-import styles from './page.module.scss'
 export default function sidebar(){
   return (
 
-<div className={styles.side}>
-  <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 background-color:#BEC1BF">
+<div>
+  <aside className="flex flex-col w-64 h-screen px-5 py-8 bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 background-color:#BEC1BF fixed">
   <a href="/home" className='text-blue-500 font-extrabold text-4xl'>Data Shelf
   </a>
 
