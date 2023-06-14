@@ -1,8 +1,13 @@
 'use client';
-
 import { useRef } from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { headers } from 'next/dist/client/components/headers';
+import { Me } from '@/common/types';
+import { Role } from '@/common/constants';
 
 export default function Page() {
+    const router = useRouter();
     const username = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
 
@@ -16,23 +21,46 @@ export default function Page() {
         });
 
         try {
-            const res = await fetch('http://localhost:8000/api/auth/signin/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+            const res = await fetch(
+                `http://${process.env.backendHost}/api/auth/signin/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username.current?.value,
+                        password: password.current?.value,
+                    }),
                 },
-                body: JSON.stringify({
-                    username: username.current?.value,
-                    password: password.current?.value,
-                }),
-            });
+            );
             const data = await res.json();
-            console.log(data);
+            Cookies.set('datashelf_token', `Bearer ${data.access_token}`, {
+                secure: true,
+                sameSite: 'strict',
+            });
+            console.log(data.access_token);
+            // check if they're admin or not
+
+            const meRes = await fetch(
+                `http://${process.env.backendHost}/api/user/me`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${data.access_token}`,
+                    },
+                },
+            );
+            const meData: Me = await meRes.json();
+
+            // if (data2.roles.includes(Role.ADMIN)) {
+            //     router.push('/admin');
+            //     return;
+            // }
+            router.push('/home');
         } catch (err) {
+            alert(err);
             console.error(err);
         }
-
-        // You can add your own login logic here
     };
     return (
         <main>

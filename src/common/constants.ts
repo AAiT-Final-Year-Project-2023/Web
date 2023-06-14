@@ -10,3 +10,8 @@ export const tagColors = [
     '#009e49',
     '#bad80a',
 ];
+
+export enum Role {
+    ADMIN = 'admin',
+    USER = 'user',
+}

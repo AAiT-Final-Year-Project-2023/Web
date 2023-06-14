@@ -52,7 +52,6 @@ export default function ImageAnnotatorComponent({
         const handleResize = () => {
             if (containerRef.current && canvasRef.current && image) {
                 const containerWidth = containerRef.current.offsetWidth;
-                console.log(containerWidth);
                 const img = new Image();
                 img.src = image.src;
                 img.onload = () => {
