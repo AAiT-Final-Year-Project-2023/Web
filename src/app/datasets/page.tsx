@@ -17,7 +17,7 @@ export default function Dataset() {
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-indigo-500">Title 1 UI</span>
+                          <span className="mb-1 block text-2xl leading-6 text-indigo-500">Title 1 UI</span>
                           Completely unstyled, fully accessible UI components</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind
@@ -31,16 +31,13 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg>
-                          {/* <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ml-40 mt-6">
-                  <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                </button> */}
                           </a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640" />
+                  </div>
               </li>
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
+                          <span className="mb-1 block text-2xl leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
                           icons, by the makers of Tailwind CSS.</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>A set of 450+ free MIT-licensed SVG icons. Available as basic SVG icons and via first-party React and
@@ -54,12 +51,12 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg></a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/heroicons@75.4a558f35.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+                  </div>
               </li>
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
+                          <span className="mb-1 block text-2xl leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
                           patterns by the makers of Tailwind CSS.</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>A collection of over 100 free MIT-licensed high-quality SVG patterns for you to use in your web
@@ -73,7 +70,7 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg></a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/heropatterns@75.82a09697.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+                  </div>
               </li>
           </ul>
 
@@ -81,7 +78,7 @@ export default function Dataset() {
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-indigo-500">Title 1 UI</span>Completely unstyled, fully
+                          <span className="mb-1 block text-2xl leading-6 text-indigo-500">Title 1 UI</span>Completely unstyled, fully
                           accessible UI components</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind
@@ -95,12 +92,12 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg></a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640" />
+                  </div>
               </li>
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
+                          <span className="mb-1 block text-2xl leading-6 text-purple-500">Heroicons</span>Beautiful hand-crafted SVG
                           icons, by the makers of Tailwind CSS.</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>A set of 450+ free MIT-licensed SVG icons. Available as basic SVG icons and via first-party React and
@@ -114,13 +111,13 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg></a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/heroicons@75.4a558f35.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+                  </div>
               </li>
 
               <li className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                   <div className="order-1 sm:ml-6 xl:ml-0">
                       <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
-                          <span className="mb-1 block text-sm leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
+                          <span className="mb-1 block text-2xl leading-6 text-cyan-500">Hero Patterns</span>Seamless SVG background
                           patterns by the makers of Tailwind CSS.</h3>
                       <div className="prose prose-slate prose-sm text-slate-600 dark:prose-dark">
                           <p>A collection of over 100 free MIT-licensed high-quality SVG patterns for you to use in your web
@@ -135,7 +132,7 @@ export default function Dataset() {
                               stroke-linecap="round" stroke-linejoin="round">
                               <path d="M0 0L3 3L0 6"></path>
                           </svg></a>
-                  </div><img src="https://tailwindcss.com/_next/static/media/heropatterns@75.82a09697.jpg" alt="" className="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640"/>
+                  </div>
               </li>
           </ul>
 
