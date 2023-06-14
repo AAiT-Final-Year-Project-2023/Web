@@ -15,6 +15,6 @@ export function middleware(request: NextRequest) {
     if (!request.cookies.has('datashelf_token')) {
         return NextResponse.redirect(new URL('/login', request.url));
     }
-    console.log(request.cookies.getAll());
+    // console.log(request.cookies.getAll());
     return;
 }

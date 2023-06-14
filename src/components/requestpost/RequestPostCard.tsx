@@ -118,7 +118,7 @@ export default function RequestPostCard({ props }: { props: { requestPost: Reque
             <div className="mt-4 flex items-center space-x-4">
                 <img
                     className="h-8 w-8 rounded-full"
-                    src={user.image}
+                    src={`http://${process.env.backendHost}/uploads/profile-images/${user.image}`}
                     alt={user.username}
                 />
                 <p className="text-gray-500">{user.username}</p>

@@ -43,6 +43,31 @@ export interface BankInformation {
     updated_at: Date;
 }
 
+
+export interface FileExtension {
+    id: string;
+    data_type: string;
+    extension: string;
+}
+
+export interface Contribution {
+    id: string;
+    user: any;
+    request_post: RequestPost;
+    data: any;
+    status: string;
+    earning: number;
+    created_at: string;
+    updated_at: string;
+}
+
+
+// ===================================================== REQUEST POST =====================================================
+export interface RequestPostResult {
+    results: RequestPost[];
+    total:   number;
+}
+
 export interface RequestPost {
     id: string;
     title: string;
@@ -65,7 +90,7 @@ export interface RequestPost {
 }
 
 interface UpvotedDownvotedUser {
-    id: string
+    id: string;
 }
 
 export interface RequestPostPaymentPlan {
@@ -80,3 +105,56 @@ export interface RequestPostUser {
     email: string;
     image: string;
 }
+// ==============================================================================================================================
+
+
+// ===================================================== DATASET =====================================================
+export interface DatasetResult {
+    results: Dataset[];
+    total:   number;
+}
+
+export interface Dataset{
+    id:           string;
+    title:        string;
+    description:  string;
+    src:          string;
+    size:         number;
+    labels:       string[];
+    status:       string;
+    datatype:     string;
+    price:        string;
+    created_at:   Date;
+    updated_at:   Date;
+    user:         DatasetUser;
+    payment_plan: DatasetPaymentPlan;
+    upvoted_by:   DatasetUpvotedBy[];
+    downvoted_by: DatasetDownvotedBy[];
+    purchased_by: DatasetPurchasedBy[];
+}
+
+export interface DatasetUpvotedBy{
+    id: string;
+}
+export interface DatasetDownvotedBy {
+    id: string;
+}
+
+export interface DatasetPaymentPlan {
+    id:        string;
+    title:     string;
+    disk_size: string;
+}
+
+export interface DatasetPurchasedBy {
+    id:       string;
+    username: string;
+}
+
+export interface DatasetUser {
+    id:       string;
+    username: string;
+    email:    string;
+    image:    string;
+}
+// ==============================================================================================================================
