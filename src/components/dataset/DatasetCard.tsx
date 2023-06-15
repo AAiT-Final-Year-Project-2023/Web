@@ -16,6 +16,7 @@ export default function DatasetCard({
     props: { dataset: Dataset; user: Me };
 }) {
     const [datasetState, setDatasetState] = useState<Dataset>(props.dataset);
+     
     const {
         id: datasetId,
         created_at,
@@ -37,19 +38,31 @@ export default function DatasetCard({
 
     const { id: userId } = props.user;
 
+
+        const hasUpvoted = (): boolean => {
+       return datasetState.upvoted_by.some(upvote=> upvote.id === userId); 
+    };
+
+    const hasdownvoted = (): boolean => {
+       return datasetState.downvoted_by.some(downvote => downvote.id === userId); 
+    };
+
+    const [isUpvoted, setIsUpvoted] = useState(hasUpvoted());
+    const [isDownvoted, setIsDownvoted] = useState(hasdownvoted());
+
     const handleUpvote = async () => {
         const token = Cookies.get('datashelf_token') || '';
         const url = `${DATASET_URL}/${datasetState.id}/upvote`;
-        const response = await upvote(url, token);
-        console.log(response);
+        const response:Dataset = await upvote(url, token);
+        setDatasetState(response);
     };
 
 
     const handleDownvote = async () => {
         const token = Cookies.get('datashelf_token') || '';
         const url = `${DATASET_URL}/${datasetState.id}/downvote`;
-        const response = await downvote(url, token);
-        console.log(response);
+        const response: Dataset = await downvote(url, token);
+        setDatasetState(response);
     };
 
     const handleDownload = async () => {
@@ -66,13 +79,7 @@ export default function DatasetCard({
         window.URL.revokeObjectURL(blobUrl);
     };
 
-    const hasUpvoted = (): boolean => {
-       return datasetState.upvoted_by.some(upvote=> upvote.id === userId); 
-    };
 
-    const hasdownvoted = (): boolean => {
-       return datasetState.downvoted_by.some(downvote => downvote.id === userId); 
-    };
 
     const datatypeView = () => {
         if (datasetState.datatype === 'image') {
@@ -96,8 +103,10 @@ export default function DatasetCard({
                         count:
                             datasetState.upvoted_by.length +
                             datasetState.downvoted_by.length,
-                        isUpvoted: hasUpvoted(),
-                        isDownvoted: hasdownvoted(),
+                        isUpvoted, 
+                        isDownvoted,
+                        setIsUpvoted,
+                        setIsDownvoted,
                         downvoteCallback: handleDownvote,
                         upvoteCallback: handleUpvote,
                     }}
