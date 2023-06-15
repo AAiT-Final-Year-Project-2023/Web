@@ -19,7 +19,10 @@ export const login = async (
     return await response.json();
 };
 
-export const googleSignIn = async (url: string, token: string): Promise<any[]> => {
+export const googleSignIn = async (
+    url: string,
+    token: string,
+): Promise<any[]> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
@@ -48,8 +51,7 @@ export const register = async (
     return await response.json();
 };
 
-
-export const verifyEmail= async (
+export const verifyEmail = async (
     url: string,
     token: string,
     verifyEmailInfo: any,
@@ -68,7 +70,7 @@ export const verifyEmail= async (
     return await response.json();
 };
 
-export const resendEmailVerification= async (
+export const resendEmailVerification = async (
     url: string,
     token: string,
     resendEmailVerificationInfo: any,
@@ -87,7 +89,7 @@ export const resendEmailVerification= async (
     return await response.json();
 };
 
-export const changepassword= async (
+export const changepassword = async (
     url: string,
     token: string,
     password: any,
@@ -106,7 +108,7 @@ export const changepassword= async (
     return await response.json();
 };
 
-export const verifyChangePassword= async (
+export const verifyChangePassword = async (
     url: string,
     token: string,
     password: any,

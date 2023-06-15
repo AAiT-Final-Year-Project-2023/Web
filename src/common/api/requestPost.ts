@@ -24,7 +24,7 @@ export const create = async (
 export const getMany = async (
     url: string,
     token: string,
-): Promise<{ results: RequestPost[], total: number }> => {
+): Promise<{ results: RequestPost[]; total: number }> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,

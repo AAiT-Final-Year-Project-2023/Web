@@ -1,9 +1,6 @@
-export const PAYMENT_URL= `${process.env.backendHost}/api/payment`;
+export const PAYMENT_URL = `${process.env.backendHost}/api/payment`;
 
-export const me = async (
-    url: string,
-    token: string,
-): Promise<any> => {
+export const me = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -17,11 +14,7 @@ export const me = async (
     return await response.json();
 };
 
-
-export const makeAdmin = async (
-    url: string,
-    token: string,
-): Promise<any> => {
+export const makeAdmin = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         method: 'PATCH',
         headers: {
@@ -38,7 +31,7 @@ export const makeAdmin = async (
 export const uploadProfilePicture = async (
     url: string,
     token: string,
-    formData: any
+    formData: any,
 ): Promise<any> => {
     const response = await fetch(url, {
         method: 'POST',

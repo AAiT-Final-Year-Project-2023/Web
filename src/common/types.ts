@@ -43,7 +43,6 @@ export interface BankInformation {
     updated_at: Date;
 }
 
-
 export interface FileExtension {
     id: string;
     data_type: string;
@@ -61,11 +60,10 @@ export interface Contribution {
     updated_at: string;
 }
 
-
 // ===================================================== REQUEST POST =====================================================
 export interface RequestPostResult {
     results: RequestPost[];
-    total:   number;
+    total: number;
 }
 
 export interface RequestPost {
@@ -107,33 +105,32 @@ export interface RequestPostUser {
 }
 // ==============================================================================================================================
 
-
 // ===================================================== DATASET =====================================================
 export interface DatasetResult {
     results: Dataset[];
-    total:   number;
+    total: number;
 }
 
-export interface Dataset{
-    id:           string;
-    title:        string;
-    description:  string;
-    src:          string;
-    size:         number;
-    labels:       string[];
-    status:       string;
-    datatype:     string;
-    price:        string;
-    created_at:   Date;
-    updated_at:   Date;
-    user:         DatasetUser;
+export interface Dataset {
+    id: string;
+    title: string;
+    description: string;
+    src: string;
+    size: number;
+    labels: string[];
+    status: string;
+    datatype: string;
+    price: string;
+    created_at: Date;
+    updated_at: Date;
+    user: DatasetUser;
     payment_plan: DatasetPaymentPlan;
-    upvoted_by:   DatasetUpvotedBy[];
+    upvoted_by: DatasetUpvotedBy[];
     downvoted_by: DatasetDownvotedBy[];
     purchased_by: DatasetPurchasedBy[];
 }
 
-export interface DatasetUpvotedBy{
+export interface DatasetUpvotedBy {
     id: string;
 }
 export interface DatasetDownvotedBy {
@@ -141,20 +138,20 @@ export interface DatasetDownvotedBy {
 }
 
 export interface DatasetPaymentPlan {
-    id:        string;
-    title:     string;
+    id: string;
+    title: string;
     disk_size: string;
 }
 
 export interface DatasetPurchasedBy {
-    id:       string;
+    id: string;
     username: string;
 }
 
 export interface DatasetUser {
-    id:       string;
+    id: string;
     username: string;
-    email:    string;
-    image:    string;
+    email: string;
+    image: string;
 }
 // ==============================================================================================================================

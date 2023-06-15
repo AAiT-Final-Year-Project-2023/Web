@@ -8,11 +8,11 @@ module.exports = {
     daisyui: {
         themes: [
             // 'light',
-            // 'dark',
+            'dark',
             // 'cupcake',
             // 'bumblebee',
             // 'emerald',
-            'corporate',
+            // 'corporate',
             // 'synthwave',
             // 'retro',
             // 'cyberpunk',

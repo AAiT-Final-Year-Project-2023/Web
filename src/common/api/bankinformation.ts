@@ -11,7 +11,7 @@ export const create = async (
             'Content-Type': 'application/json',
             Authorization: `${token}`,
         },
-        body:JSON.stringify(bankInformation),
+        body: JSON.stringify(bankInformation),
         mode: 'cors',
         cache: 'no-cache',
     });
@@ -39,7 +39,11 @@ export const get = async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
-export const update = async (url: string, token: string, dataset: Partial<any>): Promise<any> => {
+export const update = async (
+    url: string,
+    token: string,
+    dataset: Partial<any>,
+): Promise<any> => {
     const response = await fetch(url, {
         method: 'PATCH',
         headers: {

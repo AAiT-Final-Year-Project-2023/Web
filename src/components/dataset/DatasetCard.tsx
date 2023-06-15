@@ -1,8 +1,20 @@
-'use client'
-import { Dataset, Me } from "@/common/types";
-import { useState } from "react";
+'use client';
+import { Dataset, Me } from '@/common/types';
+import { useState } from 'react';
+import UpvoteDownvoteComponent from '../UpvoteDownvote';
+import moment from 'moment';
+import { ImDownload3 } from 'react-icons/im';
+import { CiFloppyDisk } from 'react-icons/ci';
+import { BsImage, BsFileText, BsCameraVideo } from 'react-icons/bs';
+import { AiOutlineAudio } from 'react-icons/ai';
+import { DATASET_URL, download, downvote, upvote } from '@/common/api/dataset';
+import Cookies from 'js-cookie';
 
-export default function DatasetCard({ props }: { props: { dataset: Dataset, user: Me } }) {
+export default function DatasetCard({
+    props,
+}: {
+    props: { dataset: Dataset; user: Me };
+}) {
     const [datasetState, setDatasetState] = useState<Dataset>(props.dataset);
     const {
         id: datasetId,
@@ -20,53 +32,139 @@ export default function DatasetCard({ props }: { props: { dataset: Dataset, user
         src,
         status,
         title,
-        user
+        user,
     } = datasetState;
 
     const { id: userId } = props.user;
 
+    const handleUpvote = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${DATASET_URL}/${datasetState.id}/upvote`;
+        const response = await upvote(url, token);
+        console.log(response);
+    };
+
+
+    const handleDownvote = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${DATASET_URL}/${datasetState.id}/downvote`;
+        const response = await downvote(url, token);
+        console.log(response);
+    };
+
+    const handleDownload = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${DATASET_URL}/${datasetState.id}/download`;
+        const blob = await download(url, token);
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = `${datasetState.title} (dataset).zip`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+    };
+
+    const hasUpvoted = (): boolean => {
+       return datasetState.upvoted_by.some(upvote=> upvote.id === userId); 
+    };
+
+    const hasdownvoted = (): boolean => {
+       return datasetState.downvoted_by.some(downvote => downvote.id === userId); 
+    };
+
+    const datatypeView = () => {
+        if (datasetState.datatype === 'image') {
+            return <BsImage />;
+        } else if (datasetState.datatype === 'text') {
+            return <BsFileText />;
+        } else if (datasetState.datatype === 'video') {
+            return <BsCameraVideo />;
+        } else if (datasetState.datatype === 'audio') {
+            return <AiOutlineAudio />;
+        } else {
+            <p>Unknown type</p>;
+        }
+    };
+
     return (
-      <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-  <div className="flex items-center mb-2">
-    <div className="flex-shrink-0">
-      <img className="h-10 w-10 rounded-full" src={user.image} alt="Profile picture" />
-    </div>
-    <div className="ml-3">
-      <p className="text-sm font-medium text-gray-900">{user.username}</p>
-      <p className="text-xs font-medium text-gray-500">{`${created_at}`}</p>
-    </div>
-  </div>
-  <div className="mb-2">
-    <h2 className="text-lg font-medium text-gray-900 mb-1">{title}</h2>
-    <p className="text-sm text-gray-700 mb-2">{description}</p>
-    <div className="flex flex-wrap">
-      {labels.map((label, index) => (
-        <span key={index} className="bg-gray-200 text-gray-700 text-xs font-medium rounded-full px-2 py-1 mr-2 mb-2">
-          {label}
-        </span>
-      ))}
-    </div>
-  </div>
-  <div className="flex items-center justify-between">
-    <div className="flex items-center">
-      <button className="text-gray-700 hover:text-gray-900 focus:outline-none">
-        <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
-          <path d="M10 3.333l-6.667 6.667h13.334L10 3.333z"/>
-        </svg>
-      </button>
-      <span className="ml-1 mr-2 text-gray-700 text-xs font-medium">{upvoted_by.length}</span>
-      <button className="text-gray-700 hover:text-gray-900 focus:outline-none">
-        <svg className="h-5 w-5 fill-current" viewBox="0 0 20 20">
-          <path d="M10 16.667l6.667-6.667H3.333L10 16.667z"/>
-        </svg>
-      </button>
-      <span className="ml-1 text-gray-700 text-xs font-medium">{downvoted_by.length}</span>
-    </div>
-    <button className="btn btn-success text-white">
-     Download 
-    </button>
-  </div>
-</div>
- 
-    )
+        <div className="flex gap-4 rounded-lg p-5 shadow-lg transition-all duration-150 ease-linear hover:rounded-none hover:shadow-2xl">
+            <div>
+                <UpvoteDownvoteComponent
+                    props={{
+                        count:
+                            datasetState.upvoted_by.length +
+                            datasetState.downvoted_by.length,
+                        isUpvoted: hasUpvoted(),
+                        isDownvoted: hasdownvoted(),
+                        downvoteCallback: handleDownvote,
+                        upvoteCallback: handleUpvote,
+                    }}
+                />
+            </div>
+            <div className="">
+                <div className="mb-2 flex items-center">
+                    <div className="flex-shrink-0">
+                        <div className="avatar ">
+                            <div className="w-16 rounded">
+                               { user.image && user.image !== "" ? <img
+                                    src={`http://${process.env.backendHost}/uploads/profile_images/${datasetState.user.image}`}
+                                    alt={`${datasetState.user.username}'s profile picture`}
+                                />: <p className="h-full bg-green-200 text-lg leading-loose ">
+                                        {user && user.username
+                                            ? user.username.charAt(0)
+                                            : ''}
+                                    </p>} 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="ml-3">
+                        <p className="text-sm font-medium">
+                            {datasetState.user.username}
+                        </p>
+                        <p className="text-xs font-medium ">{`${moment(
+                            datasetState.created_at,
+                        ).fromNow()}`}</p>
+                    </div>
+                </div>
+                <div className="mb-2">
+                    <h1 className="prose mb-1 text-xl font-bold  ">
+                        {datasetState.title}
+                    </h1>
+                    <p className="mb-2 text-sm">
+                        {datasetState.description}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-base font-medium">Datatype: </p>
+                        {datatypeView()}
+                        {datasetState.datatype}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-base font-medium">Size: </p>
+                        <CiFloppyDisk size={20} />
+                        {(datasetState.size / 1024 / 1024).toFixed(2)} MB
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                        <p className="text-base font-medium">Labels: </p>
+                        {datasetState.labels.map((label, index) => (
+                            <div
+                                key={index}
+                                className="badge badge-info badge-outline p-3"
+                            >
+                                {label}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <button
+                    className="btn-neutral btn-outline btn-sm btn"
+                    onClick={handleDownload}
+                >
+                    <ImDownload3 />
+                    Download
+                </button>
+            </div>
+        </div>
+    );
 }

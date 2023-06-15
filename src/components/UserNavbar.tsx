@@ -46,18 +46,18 @@ export default function UserNavbar() {
                         >
                             {!error && !isLoading && (
                                 <div className="f flex w-10 items-center justify-center rounded-full">
-                                    {/* {data.image ? (
+                                    {data.image ? (
                                         <img
-                                            src={`http://${process.env.backendHost}/uploads/profile-images/${data.image}`}
+                                            src={`http://${process.env.backendHost}/uploads/profile_images/${data.image}`}
                                         />
                                     ) : (
-                                        <p>{data.username.charAt(0)}</p>
-                                    )} */}
-                                    <p className="h-full bg-green-200 text-lg leading-loose ">
+                                        <p className="h-full bg-green-200 text-lg leading-loose ">
                                         {data && data.username
                                             ? data.username.charAt(0)
                                             : ''}
                                     </p>
+                                    )}
+                                    
                                 </div>
                             )}
                         </label>

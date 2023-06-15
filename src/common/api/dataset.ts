@@ -19,7 +19,7 @@ export const create = async (
     return await response.json();
 };
 
-export const getMany = async (url: string, token: string): Promise<any[]> => {
+export const getMany = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
@@ -39,7 +39,7 @@ export const get = async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
-export const upvote= async (url: string, token: string): Promise<any> => {
+export const upvote = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
@@ -49,7 +49,7 @@ export const upvote= async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
-const downvote = async (url: string, token: string): Promise<any> => {
+export const downvote = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
@@ -59,7 +59,11 @@ const downvote = async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
-export const update = async (url: string, token: string, dataset: Partial<any>): Promise<any> => {
+export const update = async (
+    url: string,
+    token: string,
+    dataset: Partial<any>,
+): Promise<any> => {
     const response = await fetch(url, {
         method: 'PATCH',
         headers: {
@@ -86,8 +90,9 @@ export const download = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
+            'Content-Type': 'application/octet-stream',
         },
         cache: 'no-store',
     });
-    return await response.json();
+    return await response.blob();
 };

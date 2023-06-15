@@ -40,8 +40,11 @@ export const get = async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
-
-export const update= async (url: string, token: string, paymentPlan: any): Promise<any> => {
+export const update = async (
+    url: string,
+    token: string,
+    paymentPlan: any,
+): Promise<any> => {
     const response = await fetch(url, {
         method: 'PATCH',
         headers: {
