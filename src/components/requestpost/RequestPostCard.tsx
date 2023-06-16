@@ -1,36 +1,20 @@
 'use client';
 import { Me, RequestPost } from '@/common/types';
 import Cookies from 'js-cookie';
-import { cookies } from 'next/dist/client/components/headers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
+import UpvoteDownvoteComponent from '../UpvoteDownvote';
+import { BsCameraVideo, BsFileText, BsImage } from 'react-icons/bs';
+import { AiOutlineAudio } from 'react-icons/ai';
+import { CiFloppyDisk } from 'react-icons/ci';
+import { SlCalender } from 'react-icons/sl';
+import { ImDownload3 } from 'react-icons/im';
+import { REQUEST_POST_URL, countContributions, diskUsage, download, downvote, upvote } from '@/common/api/requestPost';
+import Link from 'next/link';
+import { showErrorAlert } from '@/common/functions';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
 
-const fetchUpvote = async (url: string, requestPostId: string) => {
-    url += `/${requestPostId}/upvote`;
-    const token = cookies().get('datashelf_token');
-    const meRes = await fetch(url, {
-        headers: {
-            Authorization: `${token?.value}`,
-        },
-        cache: 'no-store',
-    });
-    return await meRes.json();
-};
-
-const fetchDownvote = async (url: string, requestPostId: string) => {
-    url += `/${requestPostId}/downvote`;
-    const token = Cookies.get('datashelf_token');
-    console.log(token);
-    const meRes = await fetch(url, {
-        headers: {
-            Authorization: `${token}`,
-        },
-        cache: 'no-store',
-    });
-    return await meRes.json();
-};
-
-export default function RequestPostCard({
+export default async function RequestPostCard({
     props,
 }: {
     props: { requestPost: RequestPost; user: Me };
@@ -38,6 +22,11 @@ export default function RequestPostCard({
     const [requestPostState, setRequestPostState] = useState<RequestPost>(
         props.requestPost,
     );
+    const [progress, setProgress] = useState<{ used: number, total: number }>();
+    const [totalContributions, setTotalContributions] = useState<number>();
+    const [acceptedContributions, setAcceptedContributions] = useState<number>();
+    const [rejectedContributions, setRejectedContributions] = useState<number>();
+
     const {
         id: requestPostId,
         title,
@@ -51,6 +40,8 @@ export default function RequestPostCard({
         deadline,
         closed,
         created_at,
+        access,
+        updated_at,
         user,
         payment_plan,
         upvoted_by,
@@ -59,104 +50,299 @@ export default function RequestPostCard({
 
     const { id: userId } = props.user;
 
+    const getContributions = async (stats: 'all' | 'pending' | 'accepted' | 'rejected'): Promise<number> => {
+        const token = Cookies.get('datashelf-token') || '';
+        const url = `${REQUEST_POST_URL}/${requestPostState.id}/contributionsCount?status=${stats}`;
+        const totalcontributions = await countContributions(url, token);
+        return totalcontributions;
+    }
+
+    const getProgress = async (): Promise<{ used: number, total: number }> => {
+        const token = Cookies.get('datashelf-token') || '';
+        const url = `${REQUEST_POST_URL}/${requestPostState.id}/diskUsage?status=accepted`;
+        const diskUsageResponse: { used: number, total: number } = await diskUsage(url, token);
+        return diskUsageResponse;
+    }
+
+    useEffect(() => {
+        getProgress()
+            .then(progress => setProgress(progress));
+
+        getContributions('all')
+            .then(contributions => setTotalContributions(contributions))
+
+        getContributions('accepted')
+            .then(contributions => setAcceptedContributions(contributions))
+
+        getContributions('rejected')
+            .then(contributions => setRejectedContributions(contributions))
+
+    }, [])
+
+
+    const handleDownload = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${REQUEST_POST_URL}/${requestPostState.id}/download`;
+        const response = await download(url, token);
+        if (!response.ok) {
+            showErrorAlert(response.statusText, document);
+            return;
+        }
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(new Blob([blob]));
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.setAttribute('download', `${requestPostState.title} (request post).zip`);
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+    };
+
     const hasUpvoted = (): boolean => {
-        props.requestPost.upvoted_by.forEach((upvote) => {
-            if (upvote.id === userId) return true;
-        });
-        return false;
+        return requestPostState.upvoted_by.some(
+            (upvote) => upvote.id === userId,
+        );
     };
 
     const hasdownvoted = (): boolean => {
-        props.requestPost.downvoted_by.forEach((downvote) => {
-            if (downvote.id === userId) return true;
-        });
-        return false;
+        return requestPostState.downvoted_by.some(
+            (downvote) => downvote.id === userId,
+        );
     };
 
+    const [isUpvoted, setIsUpvoted] = useState(hasUpvoted());
+    const [isDownvoted, setIsDownvoted] = useState(hasdownvoted());
+
     const handleUpvote = async () => {
-        const updatedRequestPost = await fetchUpvote(
-            'api/requestpost/',
-            requestPostId,
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${REQUEST_POST_URL}/${requestPostState.id}/upvote`;
+        const updatedRequestPost = await upvote(
+            url,
+            token,
         );
         setRequestPostState(updatedRequestPost);
     };
 
     const handleDownvote = async () => {
-        const updatedRequestPost = await fetchDownvote(
-            'api/requestpost/',
-            requestPostId,
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${REQUEST_POST_URL}/${requestPostState.id}/downvote`;
+        const updatedRequestPost = await downvote(
+            url,
+            token,
         );
         setRequestPostState(updatedRequestPost);
+
+    };
+
+    const datatypeView = () => {
+        if (requestPostState.datatype === 'image') {
+            return <BsImage />;
+        } else if (requestPostState.datatype === 'text') {
+            return <BsFileText />;
+        } else if (requestPostState.datatype === 'video') {
+            return <BsCameraVideo />;
+        } else if (requestPostState.datatype === 'audio') {
+            return <AiOutlineAudio />;
+        } else {
+            <p>Unknown type</p>;
+        }
     };
 
     return (
-        <div className="rounded-lg bg-gray-100 p-6 shadow-md">
-            <h2 className="text-lg font-semibold">{title}</h2>
-            <p className="text-gray-500">{description}</p>
-            <div className="mt-4 flex space-x-2">
-                {labels.map((label, index) => (
-                    <span
-                        key={index}
-                        className="rounded-md bg-blue-500 px-2 py-1 text-sm text-white"
-                    >
-                        {label}
-                    </span>
-                ))}
-            </div>
-            <p className="mt-4 text-gray-500">{guidelines}</p>
-            <div className="mt-4 flex space-x-2">
-                <span className="rounded-md bg-gray-200 px-2 py-1 text-sm text-gray-800">
-                    {datatype}
-                </span>
-                {extensions.map((extension, index) => (
-                    <span
-                        key={index}
-                        className="rounded-md bg-gray-200 px-2 py-1 text-sm text-gray-800"
-                    >
-                        {extension}
-                    </span>
-                ))}
-                <span className="rounded-md bg-gray-200 px-2 py-1 text-sm text-gray-800">
-                    {data_size} bytes
-                </span>
-            </div>
-            <div className="mt-4 flex space-x-2">
-                <span className="rounded-md bg-green-500 px-2 py-1 text-sm text-white">
-                    {payment}
-                </span>
-                <span className="rounded-md bg-gray-200 px-2 py-1 text-sm text-gray-800">
-                    Deadline: {`${moment(deadline).fromNow()}`}
-                </span>
-            </div>
-            <div className="mt-4 flex items-center space-x-4">
-                <img
-                    className="h-8 w-8 rounded-full"
-                    src={`http://${process.env.backendHost}/uploads/profile-images/${user.image}`}
-                    alt={user.username}
-                />
-                <p className="text-gray-500">{user.username}</p>
-            </div>
-            <div className="mt-4 flex items-center space-x-4">
-                <button
-                    className={`${
-                        hasUpvoted()
-                            ? 'bg-green-500 text-white'
-                            : 'bg-gray-200 text-gray-800'
-                    } rounded-md px-2 py-1 text-sm`}
-                    onClick={handleUpvote}
-                >
-                    ({requestPostState.upvoted_by.length})Upvote
-                </button>
-                <button
-                    className={`${
-                        hasdownvoted()
-                            ? 'bg-red-500 text-white'
-                            : 'bg-gray-200 text-gray-800'
-                    } rounded-md px-2 py-1 text-sm`}
-                    onClick={handleDownvote}
-                >
-                    ({requestPostState.downvoted_by.length}) Downvote
-                </button>
+        <div className="flex border-primary/25 border-[1.5px] gap-4 rounded-lg p-5 shadow-lg transition-all duration-150 ease-linear hover:rounded-none hover:shadow-2xl">
+            {
+                requestPostState.closed
+                &&
+                <div>
+                    <UpvoteDownvoteComponent
+                        props={{
+                            count:
+                                requestPostState.upvoted_by.length +
+                                requestPostState.downvoted_by.length,
+                            isUpvoted,
+                            isDownvoted,
+                            setIsUpvoted,
+                            setIsDownvoted,
+                            downvoteCallback: handleDownvote,
+                            upvoteCallback: handleUpvote,
+                        }}
+                    />
+                </div>
+            }
+            <div className="">
+                <div className="flex items-center justify-between">
+                    <div className="mb-2 flex items-center">
+                        <div className="flex-shrink-0">
+                            <div className="avatar ">
+                                <div className="w-16 rounded">
+                                    {user.image && user.image !== '' ? (
+                                        <img
+                                            src={user.image.includes('googleusercontent') ?
+                                                user.image :
+                                                `http://${process.env.backendHost}/uploads/profile_images/${requestPostState.user.image}`}
+                                            alt={`${user.username}'s profile picture`}
+                                        />
+                                    ) : (
+                                        <p className="h-full bg-green-200 text-lg leading-loose ">
+                                            {requestPostState.user &&
+                                                requestPostState.user.username
+                                                ? requestPostState.user.username.charAt(
+                                                    0,
+                                                )
+                                                : ''}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="ml-3">
+                            <p className="text-sm font-medium">
+                                {requestPostState.user.username}
+                            </p>
+                            <p className="text-xs font-medium ">{`${moment(
+                                requestPostState.created_at,
+                            ).fromNow()}`}</p>
+                        </div>
+                    </div>
+                    <div>
+                        {requestPostState.closed ? (
+                            <div className="badge badge-warning">Closed</div>
+                        ) : (
+                            <div className="badge badge-success">Open</div>
+                        )}
+                    </div>
+                </div>
+                <div className="flex flex-col gap-2 mb-2">
+                    <h1 className="mb-1 text-xl font-bold">
+                        {requestPostState.title}
+                    </h1>
+                    <div>
+                        <h1 className='font-bold mb-1'>Description</h1>
+                        <p className="mb-2 text-sm">
+                            {requestPostState.description}
+                        </p>
+                    </div>
+                    <div>
+                        <h1 className='font-bold mb-1'>Guidlines</h1>
+                        <p className="mb-2 text-sm">
+                            {requestPostState.guidelines}
+                        </p>
+                    </div>
+                    <div className='flex justify-between md:justify-normal md:gap-x-80 items-center flex-wrap'>
+                        <div className='flex flex-col gap-2'>
+                            <div className="flex flex-wrap items-center gap-2">
+                                <p className="text-base font-medium">Payment: </p>
+                                <FaMoneyCheckAlt />
+                                {requestPostState.payment}
+                            </div>
+                            {
+                                !requestPostState.closed &&
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <p className="text-base font-medium">Deadline: </p>
+                                    <SlCalender />
+                                    {moment(requestPostState.deadline).format('lll')}
+                                </div>
+                            }
+                            <div className="flex flex-wrap items-center gap-2">
+                                <p className="text-base font-medium">Datatype: </p>
+                                {datatypeView()}
+                                {requestPostState.datatype}
+                            </div>
+
+                            <div className="flex flex-wrap gap-3">
+                                <p className="text-base font-medium">File extensions: </p>
+                                {requestPostState.extensions.map((extension, index) => (
+                                    <div
+                                        key={index}
+                                        className="badge badge-warning badge-outline p-3"
+                                    >
+                                        {extension}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-2">
+                                <p className="text-base font-medium">Max data size: </p>
+                                <CiFloppyDisk size={20} />
+                                {(requestPostState.data_size / 1024 / 1024).toFixed(2)} MB
+                            </div>
+
+                            <div className="flex flex-wrap gap-3">
+                                <p className="text-base font-medium">Labels: </p>
+                                {requestPostState.labels.map((label, index) => (
+                                    <div
+                                        key={index}
+                                        className="badge badge-info badge-outline p-3"
+                                    >
+                                        {label}
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+                        <div>
+                            <div className="flex flex-wrap gap-3">
+                                <div className="stats stats-vertical md:stats-horizontal shadow">
+
+                                    <div className="stat">
+                                        <div className="stat-title">Total Contributionss</div>
+                                        <div className="stat-value">{totalContributions}</div>
+                                    </div>
+
+                                    <div className="stat">
+                                        <div className="stat-title">Accepted Contributions</div>
+                                        <div className="stat-value">{acceptedContributions}</div>
+                                    </div>
+
+                                    <div className="stat">
+                                        <div className="stat-title">Rejected Contributions</div>
+                                        <div className="stat-value">{rejectedContributions}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex items-center justify-between mt-4 flex-wrap'>
+                    <div className="flex flex-wrap gap-4 items-center">
+                        {
+                            requestPostState.user.id === userId &&
+                            <Link className="btn btn-success btn-outline" href={`requestposts/${requestPostState.id}}/`}> See contributions </Link>
+                        }
+
+                        {
+                            requestPostState.closed &&
+                            <button
+                                className="btn-info btn-outline btn-sm btn"
+                                onClick={handleDownload}
+                            >
+                                <ImDownload3 />
+                                Download
+                            </button>
+
+                        }
+
+                        {
+                            !requestPostState.closed && requestPostState.user.id !== userId &&
+                            <Link className="btn btn-success btn-outline" href={`requestposts/${requestPostState.id}/contribute`}> Contribute </Link>
+                        }
+                    </div>
+                    <div>
+                        {
+                            userId === requestPostState.user.id &&
+                            progress &&
+                            <div className='flex gap-4 items-center'>
+                                <p>Disk usage: </p>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <div className="radial-progress bg-primary text-primary-content border-4 border-primary" style={{ "--value": (progress.used / progress.total) * 100 }}>{(progress.used / progress.total) * 100}%</div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
             </div>
         </div>
     );

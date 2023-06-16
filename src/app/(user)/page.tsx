@@ -2,6 +2,7 @@
 import AudioAnnotatorComponent from '@/components/annotators/AudioAnnotator';
 import { AudioLabel, ImageLabel } from '@/common/types';
 import ImageAnnotatorComponent from '@/components/annotators/ImageAnnotator';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
     const tags = ['lights', 'star', 'die'];
@@ -30,8 +31,11 @@ export default function Page() {
         console.log(data);
     };
 
+    const router = useRouter();
+    router.push("/home");
+
     return (
-        <main className="">
+        <main className="content">
             <h1>Landing Page</h1>
             {/* <VideoAnnotatorComponent /> */}
             {/* <ImageAnnotatorComponent
@@ -52,14 +56,14 @@ export default function Page() {
                     cb: getData,
                 }}
             /> */}
-            <ImageAnnotatorComponent
+            {/* <ImageAnnotatorComponent
                 props={{
                     tags,
                     supportedExtensions,
                     cb: getData,
                     initialAnnotations: [],
                     maxFileSize: 1_000_000_000,
-                }}
+                }} */}
             />
         </main>
     );

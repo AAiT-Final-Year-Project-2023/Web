@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { headers } from 'next/dist/client/components/headers';
 import { Me } from '@/common/types';
 import { Role } from '@/common/constants';
+import Link from 'next/link';
 
 export default function Page() {
     const router = useRouter();
@@ -67,18 +68,18 @@ export default function Page() {
             <div className="flex min-h-screen flex-col items-center justify-center">
                 <div className="w-full max-w-md">
                     <form
-                        className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-lg"
+                        className="mb-4 rounded px-8 pb-8 pt-6 shadow-lg"
                         onSubmit={handleLogin}
                     >
                         <div className="mb-4">
                             <label
-                                className="mb-2 block text-sm font-bold text-gray-700"
+                                className="mb-2 block text-sm font-bold "
                                 htmlFor="username"
                             >
                                 Username
                             </label>
                             <input
-                                className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+                                className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
                                 id="username"
                                 type="text"
                                 placeholder="username"
@@ -87,13 +88,13 @@ export default function Page() {
                         </div>
                         <div className="mb-6">
                             <label
-                                className="mb-2 block text-sm font-bold text-gray-700"
+                                className="mb-2 block text-sm font-bold "
                                 htmlFor="password"
                             >
                                 Password
                             </label>
                             <input
-                                className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+                                className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
                                 id="password"
                                 type="password"
                                 placeholder="********"
@@ -107,12 +108,17 @@ export default function Page() {
                             >
                                 Sign In
                             </button>
-                            <a
-                                className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
-                                href="#"
-                            >
-                                Forgot Password?
-                            </a>
+                            <div className='flex gap-4'>
+                                <a
+                                    className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
+                                    href="#"
+                                >
+                                    Forgot Password?
+                                </a>
+                                <Link href={'/register'}>
+                                    Register
+                                </Link>
+                            </div>
                         </div>
                     </form>
                     <div className="text-center">

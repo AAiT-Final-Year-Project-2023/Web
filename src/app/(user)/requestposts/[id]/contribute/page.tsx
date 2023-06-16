@@ -1,35 +1,12 @@
-'use client';
-import TextAnnotatorComponent from '@/components/annotators/TextAnnotator';
-import { AnnotateTag } from 'react-text-annotate-blend';
-
-const tags = [
-    'dog',
-    'cat',
-    'rat',
-    'camel',
-    'cow',
-    'that',
-    'what',
-    'she',
-    'said',
-    'bells',
-];
-const extensions = ['txt'];
+import RequestPostDetail from "@/components/requestpost/RequestPostDetail";
+import { cookies } from "next/dist/client/components/headers";
 
 export default function Page() {
-    const getAnnotations = (annotations: AnnotateTag[]) => {
-        console.log(annotations);
-    };
+    const token = cookies().get('datashelf_token')?.value || '';
+
     return (
-        <>
-            <TextAnnotatorComponent
-                props={{
-                    tags,
-                    supported_extensions: extensions,
-                    initial_annotations: [],
-                    callback: getAnnotations,
-                }}
-            />
-        </>
+        <main className="container">
+            <RequestPostDetail props={{ token }}/>
+        </main>
     );
 }

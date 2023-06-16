@@ -44,6 +44,17 @@ export const get = async (url: string, token: string): Promise<RequestPost> => {
     return await response.json();
 };
 
+export const download = async (url: string, token: string): Promise<Response> => {
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `${token}`,
+            'Content-Type': 'application/octet-stream',
+        },
+        cache: 'no-store',
+    });
+    return response;
+};
+
 export const close = async (
     url: string,
     token: string,
@@ -112,7 +123,20 @@ export const makePrivate = async (
 export const diskUsage = async (
     url: string,
     token: string,
-): Promise<RequestPost> => {
+): Promise<{used: number, total: number}> => {
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `${token}`,
+        },
+        cache: 'no-store',
+    });
+    return await response.json();
+};
+
+export const countContributions = async (
+    url: string,
+    token: string,
+): Promise<number> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,

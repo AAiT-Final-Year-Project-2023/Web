@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 
-const getUser = async (url: string) => {
+const getUser = async (url: string): Promise<Me> => {
     const token = Cookies.get('datashelf_token');
     const meRes = await fetch(url, {
         headers: {
@@ -46,9 +46,11 @@ export default function UserNavbar() {
                         >
                             {!error && !isLoading && (
                                 <div className="f flex w-10 items-center justify-center rounded-full">
-                                    {data.image ? (
+                                    {data && data.image ? (
                                         <img
-                                            src={`http://${process.env.backendHost}/uploads/profile_images/${data.image}`}
+                                            src={data.image.includes('googleusercontent') ? 
+                                            data.image : 
+                                            `http://${process.env.backendHost}/uploads/profile_images/${data.image}`}
                                         />
                                     ) : (
                                         <p className="h-full bg-green-200 text-lg leading-loose ">

@@ -25,7 +25,7 @@ export default function AudioAnnotatorComponent({
         supportedExtensions: string[];
         maxFileSize: number;
         initialAnnotations?: AudioLabel[];
-        cb: (arg: AudioLabel[]) => void;
+        cb: (arg: AudioLabel[], file: File | null) => void;
     };
 }) {
     const {
@@ -106,9 +106,6 @@ export default function AudioAnnotatorComponent({
                 RegionsPlugin.create(),
             );
 
-            wavesurferRegions.current.enableDragSelection({
-                color: colorsMap.get(selectedTag),
-            });
         }
 
         wavesurferRegions.current?.on('region-updated', regionUpdatedHandler);
@@ -179,8 +176,8 @@ export default function AudioAnnotatorComponent({
             endTime: region.end,
         };
 
-        setAnnotations((old: AudioAnnotation[]) => {
-            return old.map((annotation) => {
+        setAnnotations((prev: AudioAnnotation[]) => {
+            return prev.map((annotation) => {
                 if (annotation.id == updatedRegion.id) {
                     return updatedRegion;
                 }
@@ -275,13 +272,14 @@ export default function AudioAnnotatorComponent({
     };
 
     const handleSubmit = () => {
-        cb(annotations);
+        cb(annotations, audioFile);
     };
 
     return (
         <div className="">
-            <div className="flex items-center justify-around">
+            <div className="flex items-center justify-around my-5">
                 <input
+                    className='file-input file-input-bordered file-input-primary w-full max-w-xs'
                     type="file"
                     accept={supportedExtensions
                         .map((ext) => `.${ext}`)
@@ -289,15 +287,15 @@ export default function AudioAnnotatorComponent({
                     onChange={handleFileChange}
                 />
 
-                {wavesurfer.current && (
-                    <div className="flex items-center justify-start gap-4">
-                        <div>
+                {wavesurfer.current && audioFile && (
+                    <>
+                        <div className='flex gap-3 items-center'>
                             <label htmlFor="tag-select">Tag: </label>
                             <select
                                 id="tag-select"
                                 value={selectedTag}
                                 onChange={handleTagChange}
-                                className="bg-gray-100 p-3"
+                                className="select select-primary w-full max-w-xs"
                             >
                                 {tags.map((tag) => (
                                     <option key={tag} value={tag}>
@@ -313,8 +311,8 @@ export default function AudioAnnotatorComponent({
                         >
                             Add New Annotation
                         </button>
-                    </div>
-                )}
+
+                    </>)}
             </div>
             <div ref={wavesurferContainer} />
             {audioFile && wavesurfer.current ? (
@@ -357,11 +355,10 @@ export default function AudioAnnotatorComponent({
                             <input
                                 onChange={handleVolumeChange}
                                 type="range"
-                                className={`h-4 w-full appearance-none rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none ${
-                                    isMuted
+                                className={`h-4 w-full appearance-none rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none ${isMuted
                                         ? 'thumb:bg-gray-400'
                                         : 'thumb:bg-blue-500'
-                                }`}
+                                    }`}
                                 value={volume}
                             />
                             <p className={isMuted ? `text-gray-400` : 'black'}>

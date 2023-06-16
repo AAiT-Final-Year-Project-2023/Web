@@ -121,8 +121,8 @@ export default function DatasetCard({
                                     src={`http://${process.env.backendHost}/uploads/profile_images/${datasetState.user.image}`}
                                     alt={`${datasetState.user.username}'s profile picture`}
                                 />: <p className="h-full bg-green-200 text-lg leading-loose ">
-                                        {user && user.username
-                                            ? user.username.charAt(0)
+                                        {datasetState.user && datasetState.user.username
+                                            ? datasetState.user.username.charAt(0)
                                             : ''}
                                     </p>} 
                             </div>
@@ -137,7 +137,7 @@ export default function DatasetCard({
                         ).fromNow()}`}</p>
                     </div>
                 </div>
-                <div className="mb-2">
+                <div className="flex flex-col gap-2 mb-2">
                     <h1 className="prose mb-1 text-xl font-bold  ">
                         {datasetState.title}
                     </h1>
@@ -167,7 +167,7 @@ export default function DatasetCard({
                     </div>
                 </div>
                 <button
-                    className="btn-neutral btn-outline btn-sm btn"
+                    className="btn-info btn-outline btn-sm btn mt-4"
                     onClick={handleDownload}
                 >
                     <ImDownload3 />

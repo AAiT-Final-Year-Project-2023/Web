@@ -9,14 +9,16 @@ export default function TextAnnotatorComponent({
     props: {
         tags: string[];
         supported_extensions: string[];
+        max_file_size: number;
         initial_annotations?: AnnotateTag[];
-        callback: (arg: AnnotateTag[]) => void;
+        callback: (arg: AnnotateTag[], file: File | null) => void;
     };
 }) {
     const { tags, supported_extensions, initial_annotations, callback } = props;
     const [annotations, setAnnotations] = useState<AnnotateTag[]>(
         initial_annotations ?? [],
     );
+    const [file, setFile] = useState<File | null>(null);
     const [selectedTag, setSelectedTag] = useState<string>(tags[0]);
     const [text, setText] = useState('');
     const message = useRef<HTMLDivElement>(null);
@@ -28,7 +30,6 @@ export default function TextAnnotatorComponent({
     });
 
     const handleAnnotationChange = (value: any) => {
-        console.log(value);
         setAnnotations(value);
     };
 
@@ -44,7 +45,7 @@ export default function TextAnnotatorComponent({
     });
 
     const handleSubmit = () => {
-        if (callback) callback(annotations);
+        if (callback) callback(annotations, file);
     };
 
     const handleFileChange = (event: any) => {
@@ -54,7 +55,7 @@ export default function TextAnnotatorComponent({
             const file_extention = file_name.substring(
                 file_name.lastIndexOf('.') + 1,
             );
-
+            
             if (!supported_extensions.includes(file_extention)) {
                 alert('Unsupported file type!');
                 return;
@@ -74,19 +75,18 @@ export default function TextAnnotatorComponent({
             };
 
             reader.readAsText(file);
+            setFile(file);
         }
     };
 
     return (
-        <div className="rounded-2xl bg-zinc-200 p-8">
+        <div className="rounded-2xl p-8">
             <div id="loading-text" ref={message}></div>
-            <h2 className="mb-4 text-3xl">Choose a file to be labeled</h2>
-
             <div className="flex flex-col items-start gap-4">
                 <div className="flex items-center gap-3">
-                    <label htmlFor="tag-select">Select a tag</label>
+                    <label htmlFor="tag-select">Tag:</label>
                     <select
-                        className="focus:shadow-outline appearance-none rounded border border-gray-300 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none"
+                        className="select select-primary w-full max-w-xs"
                         id="tag-select"
                         onChange={handleTagChange}
                     >
@@ -113,17 +113,17 @@ export default function TextAnnotatorComponent({
                     </div>
                 )}
 
-                <div className="flex w-full items-end justify-between">
+                <div className="flex w-full gap-4 items-end justify-between">
                     <label className="block">
-                        <span className="text-gray-700">Choose a file</span>
                         <input
                             type="file"
-                            className="w-full appearance-none rounded-lg border-2 border-gray-300 bg-transparent px-4 py-2"
+                            className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                            onChange={handleFileChange}
                         />
                     </label>
                     <button
                         onClick={handleSubmit}
-                        className="block rounded-lg bg-green-500 p-4 text-lg font-bold text-white shadow-lg"
+                        className="btn btn-outline btn-primary"
                     >
                         Submit
                     </button>

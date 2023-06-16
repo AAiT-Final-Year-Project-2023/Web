@@ -11,17 +11,17 @@ import { cookies } from 'next/dist/client/components/headers';
 import { Suspense } from 'react';
 
 export default async function Page() {
-    // get the latest 3 request posts
+    // get the latest 5 request posts
     const token = cookies().get('datashelf_token')?.value || '';
     const requestPostUrl =
-        REQUEST_POST_URL + `?page=${1}&limit=${3}&sortByDate=ASC`;
+        REQUEST_POST_URL + `?page=${1}&limit=${5}&sortByDate=ASC`;
     const requestPosts: Promise<RequestPostResult> = getManyRequestPosts(
         requestPostUrl,
         token,
     );
 
-    // get the latest 3 datasets
-    const datasetUrl = DATASET_URL + `?page=${1}&limit=${3}&sortByDate=ASC`;
+    // get the latest 5 datasets
+    const datasetUrl = DATASET_URL + `?page=${1}&limit=${5}&sortByDate=ASC`;
     const datasets: Promise<DatasetResult> = getManyDatasets(datasetUrl, token);
 
     const meUrl = USER_URL + '/me';
@@ -29,9 +29,9 @@ export default async function Page() {
 
     return (
         <main className="">
-            <h1>Home Page</h1>
-            <section>
-                <h1 className="prose">Latest Request Posts</h1>
+            <h1 className='text-3xl font-bold'>Home Page</h1>
+            <section className='my-2'>
+                <h1 className="text-3xl font-bold">Latest Request Posts</h1>
                 <Suspense
                     fallback={
                         <div className="flex w-full justify-center">
@@ -45,8 +45,8 @@ export default async function Page() {
                     />
                 </Suspense>
             </section>
-            <section>
-                <h1 className="prose">Latest Datasets</h1>
+            <section className='my-2'>
+                <h1 className="text-3xl font-bold">Latest Datasets</h1>
                 <Suspense
                     fallback={
                         <div className="flex w-full justify-center">

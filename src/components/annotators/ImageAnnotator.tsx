@@ -15,12 +15,13 @@ export default function ImageAnnotatorComponent({
         supportedExtensions: string[];
         maxFileSize: number;
         initialAnnotations?: ImageLabel[];
-        cb: (arg: ImageLabel[]) => void;
+        cb: (arg: ImageLabel[], file: File | null) => void;
     };
 }) {
     const { tags, supportedExtensions, maxFileSize, initialAnnotations, cb } =
         props;
     const [image, setImage] = useState<HTMLImageElement | null>(null);
+    const [file, setFile] = useState<File | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
@@ -104,9 +105,9 @@ export default function ImageAnnotatorComponent({
             const img = new Image();
             img.onload = () => {
                 setImage(img);
-                handleImageLoad();
             };
             img.src = URL.createObjectURL(file);
+            setFile(file);
         }
     };
 
@@ -217,30 +218,48 @@ export default function ImageAnnotatorComponent({
     };
 
     const handleSubmit = () => {
-        cb(annotations);
+        cb(annotations, file);
     };
 
     return (
         <div className="">
+           <div className='flex items-center gap-x-16 gap-y-10 '>
             <input
                 type="file"
+                className='file-input file-input-bordered file-input-primary w-full max-w-xs'
                 accept={supportedExtensions
-                    .map((ext) => `image/${ext}`)
+                    .map((ext) => `.${ext}`)
                     .join(',')}
                 onChange={handleFileChange}
             />
-            <div className="my-3 flex flex-wrap items-start gap-4">
-                <div ref={containerRef} className="relative max-w-max">
+            <div className='flex items-center justify-center'>
+                    <label htmlFor="tag-select" className='m-4'>Tag: </label>
+                    <select
+                        id="tag-select"
+                        value={selectedTag}
+                        onChange={handleTagChange}
+                        className="select select-primary w-full max-w-xs"
+                    >
+                        {tags.map((tag) => (
+                            <option key={tag} value={tag}>
+                                {tag}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div> 
+            <div className="my-3 flex flex-wrap items-start gap-x-24">
+                <div ref={containerRef} className="relative">
                     <canvas
                         ref={canvasRef}
-                        width={0}
-                        height={0}
                         onMouseDown={handleMouseDown}
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}
                         onMouseOut={handleMouseUp}
                         style={{
                             cursor: 'crosshair',
+                            width: image?.width,
+                            height: image?.height
                         }}
                     ></canvas>
                     {image && (
@@ -262,7 +281,7 @@ export default function ImageAnnotatorComponent({
                 {annotations.length > 0 && (
                     <div className="w-max shadow-lg">
                         <div className="bg-neutral-100 p-3 text-center text-lg">
-                            Tags {'('}
+                            Annotations {'('}
                             {annotations.length}
                             {')'}
                         </div>
@@ -275,7 +294,7 @@ export default function ImageAnnotatorComponent({
                                     <p>{rectangle.id}</p>
                                     <p>{rectangle.tag}</p>
                                     <button
-                                        className="rounded-md bg-gray-100 px-3 py-1 font-semibold"
+                                        className="btn btn-active btn-ghost"
                                         onClick={() =>
                                             handleAnnotationShowHide(
                                                 rectangle.id,
@@ -285,7 +304,7 @@ export default function ImageAnnotatorComponent({
                                         {rectangle.visible ? 'hide' : 'show'}
                                     </button>
                                     <button
-                                        className="rounded-md bg-red-600 px-3 py-1 font-semibold text-white"
+                                        className="btn btn-error"
                                         onClick={() =>
                                             handleAnnotationDelete(rectangle.id)
                                         }
@@ -299,26 +318,12 @@ export default function ImageAnnotatorComponent({
                 )}{' '}
             </div>
             {/* {image && ( */}
-            <div className="flex flex-wrap items-center justify-between p-7">
-                <div>
-                    <label htmlFor="tag-select">Select Tag: </label>
-                    <select
-                        id="tag-select"
-                        value={selectedTag}
-                        onChange={handleTagChange}
-                        className="bg-gray-100 p-3"
-                    >
-                        {tags.map((tag) => (
-                            <option key={tag} value={tag}>
-                                {tag}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+            <div className="flex flex-col items-center p-7">
+                
                 <div>
                     <button
                         onClick={handleSubmit}
-                        className="rounded-md bg-green-500 p-3 font-bold text-white"
+                        className="btn btn-outline btn-primary"
                     >
                         Submit
                     </button>

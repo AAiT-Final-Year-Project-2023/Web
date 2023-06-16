@@ -10,9 +10,10 @@ export async function HomeRequestPostsContainer({
     const me: Me = props.user;
 
     return (
-        <ul>
+        <ul className="flex flex-wrap">
             {requestPosts.results.map((requestPost) => (
                 <li key={requestPost.id}>
+                    {/* @ts-expect-error Server Component */}
                     <RequestPostCard props={{ requestPost, user: me }} />
                 </li>
             ))}

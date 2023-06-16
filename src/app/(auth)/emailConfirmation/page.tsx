@@ -2,39 +2,33 @@
 import { useRef } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import { headers } from 'next/dist/client/components/headers';
 import { Me } from '@/common/types';
-import { Role } from '@/common/constants';
-import Link from 'next/link';
 
 export default function Page() {
     const router = useRouter();
     const email = useRef<HTMLInputElement>(null);
-    const username = useRef<HTMLInputElement>(null);
-    const password = useRef<HTMLInputElement>(null);
+    const code = useRef<HTMLInputElement>(null);
 
-    const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleConfirmation = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // do frontend validation here
 
         console.log({
-            username: username.current?.value,
-            password: password.current?.value,
-            email: email.current?.value
+            email: email.current?.value,
+            code: code.current?.value,
         });
 
         try {
             const res = await fetch(
-                `http://${process.env.backendHost}/api/auth/signup/`,
+                `http://${process.env.backendHost}/api/auth/verify/`,
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: username.current?.value,
-                        password: password.current?.value,
-                        email: email.current?.value
+                        email: email.current?.value,
+                        code: code.current?.value
                     }),
                 },
             );
@@ -72,7 +66,7 @@ export default function Page() {
                 <div className="w-full max-w-md">
                     <form
                         className="mb-4 rounded px-8 pb-8 pt-6 shadow-lg"
-                        onSubmit={handleRegister}
+                        onSubmit={handleConfirmation}
                     >
                         <div className="mb-4">
                             <label
@@ -92,52 +86,28 @@ export default function Page() {
                         <div className="mb-4">
                             <label
                                 className="mb-2 block text-sm font-bold "
-                                htmlFor="username"
+                                htmlFor="code"
                             >
-                                Username
+                               Code 
                             </label>
                             <input
                                 className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
-                                id="username"
+                                id="code"
                                 type="text"
-                                placeholder="username"
-                                ref={username}
+                                placeholder="code"
+                                ref={code}
                             />
                         </div>
-                        <div className="mb-6">
-                            <label
-                                className="mb-2 block text-sm font-bold "
-                                htmlFor="password"
-                            >
-                                Password
-                            </label>
-                            <input
-                                className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
-                                id="password"
-                                type="password"
-                                placeholder="********"
-                                ref={password}
-                            />
-                        </div>
+                       
                         <div className="flex items-center justify-between">
                             <button
                                 className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
                                 type="submit"
                             >
-                               Register 
+                              Confirm 
                             </button>
-                           <Link href={'/login'}>Login</Link> 
                         </div>
                     </form>
-                    <div className="text-center">
-                        <p className="mb-2 text-gray-500">Or sign in with</p>
-                        <button
-                            className="focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none"
-                            type="button"
-                        >
-                            Google
-                        </button>
-                    </div>
                 </div>
             </div>
         </main>
