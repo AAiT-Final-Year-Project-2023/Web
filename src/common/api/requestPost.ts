@@ -44,7 +44,10 @@ export const get = async (url: string, token: string): Promise<RequestPost> => {
     return await response.json();
 };
 
-export const download = async (url: string, token: string): Promise<Response> => {
+export const download = async (
+    url: string,
+    token: string,
+): Promise<Response> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,
@@ -123,7 +126,7 @@ export const makePrivate = async (
 export const diskUsage = async (
     url: string,
     token: string,
-): Promise<{used: number, total: number}> => {
+): Promise<{ used: number; total: number }> => {
     const response = await fetch(url, {
         headers: {
             Authorization: `${token}`,

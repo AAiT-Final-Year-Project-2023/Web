@@ -223,22 +223,24 @@ export default function ImageAnnotatorComponent({
 
     return (
         <div className="">
-           <div className='flex items-center gap-x-16 gap-y-10 '>
-            <input
-                type="file"
-                className='file-input file-input-bordered file-input-primary w-full max-w-xs'
-                accept={supportedExtensions
-                    .map((ext) => `.${ext}`)
-                    .join(',')}
-                onChange={handleFileChange}
-            />
-            <div className='flex items-center justify-center'>
-                    <label htmlFor="tag-select" className='m-4'>Tag: </label>
+            <div className="flex items-center gap-x-16 gap-y-10 ">
+                <input
+                    type="file"
+                    className="file-input-bordered file-input-primary file-input w-full max-w-xs"
+                    accept={supportedExtensions
+                        .map((ext) => `.${ext}`)
+                        .join(',')}
+                    onChange={handleFileChange}
+                />
+                <div className="flex items-center justify-center">
+                    <label htmlFor="tag-select" className="m-4">
+                        Tag:{' '}
+                    </label>
                     <select
                         id="tag-select"
                         value={selectedTag}
                         onChange={handleTagChange}
-                        className="select select-primary w-full max-w-xs"
+                        className="select-primary select w-full max-w-xs"
                     >
                         {tags.map((tag) => (
                             <option key={tag} value={tag}>
@@ -247,7 +249,7 @@ export default function ImageAnnotatorComponent({
                         ))}
                     </select>
                 </div>
-            </div> 
+            </div>
             <div className="my-3 flex flex-wrap items-start gap-x-24">
                 <div ref={containerRef} className="relative">
                     <canvas
@@ -259,7 +261,7 @@ export default function ImageAnnotatorComponent({
                         style={{
                             cursor: 'crosshair',
                             width: image?.width,
-                            height: image?.height
+                            height: image?.height,
                         }}
                     ></canvas>
                     {image && (
@@ -294,7 +296,7 @@ export default function ImageAnnotatorComponent({
                                     <p>{rectangle.id}</p>
                                     <p>{rectangle.tag}</p>
                                     <button
-                                        className="btn btn-active btn-ghost"
+                                        className="btn-ghost btn-active btn"
                                         onClick={() =>
                                             handleAnnotationShowHide(
                                                 rectangle.id,
@@ -304,7 +306,7 @@ export default function ImageAnnotatorComponent({
                                         {rectangle.visible ? 'hide' : 'show'}
                                     </button>
                                     <button
-                                        className="btn btn-error"
+                                        className="btn-error btn"
                                         onClick={() =>
                                             handleAnnotationDelete(rectangle.id)
                                         }
@@ -319,11 +321,10 @@ export default function ImageAnnotatorComponent({
             </div>
             {/* {image && ( */}
             <div className="flex flex-col items-center p-7">
-                
                 <div>
                     <button
                         onClick={handleSubmit}
-                        className="btn btn-outline btn-primary"
+                        className="btn-primary btn-outline btn"
                     >
                         Submit
                     </button>

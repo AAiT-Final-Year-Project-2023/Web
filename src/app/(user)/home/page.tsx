@@ -29,8 +29,8 @@ export default async function Page() {
 
     return (
         <main className="">
-            <h1 className='text-3xl font-bold'>Home Page</h1>
-            <section className='my-2'>
+            <h1 className="text-3xl font-bold">Home Page</h1>
+            <section className="my-2">
                 <h1 className="text-3xl font-bold">Latest Request Posts</h1>
                 <Suspense
                     fallback={
@@ -45,7 +45,7 @@ export default async function Page() {
                     />
                 </Suspense>
             </section>
-            <section className='my-2'>
+            <section className="my-2">
                 <h1 className="text-3xl font-bold">Latest Datasets</h1>
                 <Suspense
                     fallback={

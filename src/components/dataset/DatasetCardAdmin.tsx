@@ -7,13 +7,20 @@ import { ImDownload3 } from 'react-icons/im';
 import { CiFloppyDisk } from 'react-icons/ci';
 import { BsImage, BsFileText, BsCameraVideo } from 'react-icons/bs';
 import { AiOutlineAudio } from 'react-icons/ai';
-import { DATASET_URL, download, downvote, upvote } from '@/common/api/dataset';
+import {
+    DATASET_URL,
+    accept,
+    download,
+    downvote,
+    reject,
+    upvote,
+} from '@/common/api/dataset';
 import Cookies from 'js-cookie';
 
-export default function DatasetCard({
+export default function DatasetCardAdmin({
     props,
 }: {
-    props: { dataset: Dataset; user: Me };
+    props: { dataset: Dataset };
 }) {
     const [datasetState, setDatasetState] = useState<Dataset>(props.dataset);
 
@@ -36,35 +43,6 @@ export default function DatasetCard({
         user,
     } = datasetState;
 
-    const { id: userId } = props.user;
-
-    const hasUpvoted = (): boolean => {
-        return datasetState.upvoted_by.some((upvote) => upvote.id === userId);
-    };
-
-    const hasdownvoted = (): boolean => {
-        return datasetState.downvoted_by.some(
-            (downvote) => downvote.id === userId,
-        );
-    };
-
-    const [isUpvoted, setIsUpvoted] = useState(hasUpvoted());
-    const [isDownvoted, setIsDownvoted] = useState(hasdownvoted());
-
-    const handleUpvote = async () => {
-        const token = Cookies.get('datashelf_token') || '';
-        const url = `${DATASET_URL}/${datasetState.id}/upvote`;
-        const response: Dataset = await upvote(url, token);
-        setDatasetState(response);
-    };
-
-    const handleDownvote = async () => {
-        const token = Cookies.get('datashelf_token') || '';
-        const url = `${DATASET_URL}/${datasetState.id}/downvote`;
-        const response: Dataset = await downvote(url, token);
-        setDatasetState(response);
-    };
-
     const handleDownload = async () => {
         const token = Cookies.get('datashelf_token') || '';
         const url = `${DATASET_URL}/${datasetState.id}/download`;
@@ -77,6 +55,20 @@ export default function DatasetCard({
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(blobUrl);
+    };
+
+    const handleAccept = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${DATASET_URL}/${datasetState.id}/accept`;
+        const response: Dataset = await accept(url, token);
+        setDatasetState((old) => response);
+    };
+
+    const handleReject = async () => {
+        const token = Cookies.get('datashelf_token') || '';
+        const url = `${DATASET_URL}/${datasetState.id}/reject`;
+        const response: Dataset = await reject(url, token);
+        setDatasetState((old) => response);
     };
 
     const datatypeView = () => {
@@ -94,22 +86,7 @@ export default function DatasetCard({
     };
 
     return (
-        <div className="flex gap-4 rounded-lg p-5 shadow-lg transition-all duration-150 ease-linear hover:rounded-none hover:shadow-2xl">
-            <div>
-                <UpvoteDownvoteComponent
-                    props={{
-                        count:
-                            datasetState.upvoted_by.length +
-                            datasetState.downvoted_by.length,
-                        isUpvoted,
-                        isDownvoted,
-                        setIsUpvoted,
-                        setIsDownvoted,
-                        downvoteCallback: handleDownvote,
-                        upvoteCallback: handleUpvote,
-                    }}
-                />
-            </div>
+        <div className="flex gap-4 rounded-lg p-5 shadow-md transition-all duration-150 ease-linear hover:rounded-none hover:shadow-2xl">
             <div className="">
                 <div className="mb-2 flex items-center">
                     <div className="flex-shrink-0">
@@ -169,13 +146,29 @@ export default function DatasetCard({
                         ))}
                     </div>
                 </div>
-                <button
-                    className="btn-info btn-outline btn-sm btn mt-4"
-                    onClick={handleDownload}
-                >
-                    <ImDownload3 />
-                    Download
-                </button>
+                <div>
+                    <button
+                        className="btn-info btn-outline btn-sm btn my-4"
+                        onClick={handleDownload}
+                    >
+                        <ImDownload3 />
+                        Download
+                    </button>
+                    <div className="flex justify-between">
+                        <button
+                            className="btn-success btn-outline btn-sm btn"
+                            onClick={handleAccept}
+                        >
+                            Accept
+                        </button>
+                        <button
+                            className="btn-outline btn-error btn-sm btn"
+                            onClick={handleReject}
+                        >
+                            Reject
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );

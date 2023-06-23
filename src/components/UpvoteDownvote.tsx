@@ -11,22 +11,29 @@ interface Props {
     count: number;
     isUpvoted: boolean;
     isDownvoted: boolean;
-    setIsUpvoted: Dispatch<SetStateAction<boolean>>,
-    setIsDownvoted: Dispatch<SetStateAction<boolean>>,
+    setIsUpvoted: Dispatch<SetStateAction<boolean>>;
+    setIsDownvoted: Dispatch<SetStateAction<boolean>>;
     upvoteCallback: () => void;
     downvoteCallback: () => void;
 }
 
 export default function UpvoteDownvoteComponent({ props }: { props: Props }) {
-    const { count, isUpvoted, isDownvoted,setIsUpvoted, setIsDownvoted ,upvoteCallback, downvoteCallback } =
-        props;
-       const [voteCount, setVoteCount] = useState(count);
+    const {
+        count,
+        isUpvoted,
+        isDownvoted,
+        setIsUpvoted,
+        setIsDownvoted,
+        upvoteCallback,
+        downvoteCallback,
+    } = props;
+    const [voteCount, setVoteCount] = useState(count);
 
     const handleUpvote = () => {
-        if (!isUpvoted&& !isDownvoted) {
+        if (!isUpvoted && !isDownvoted) {
             setIsUpvoted(true);
             setVoteCount(voteCount + 1);
-        } else if (!isUpvoted&& isDownvoted) {
+        } else if (!isUpvoted && isDownvoted) {
             setIsUpvoted(true);
             setIsDownvoted(false);
             setVoteCount(voteCount + 2);
@@ -38,10 +45,10 @@ export default function UpvoteDownvoteComponent({ props }: { props: Props }) {
     };
 
     const handleDownvote = () => {
-        if (!isUpvoted&& !isDownvoted) {
+        if (!isUpvoted && !isDownvoted) {
             setIsDownvoted(true);
             setVoteCount(voteCount - 1);
-        } else if (isUpvoted&& !isDownvoted) {
+        } else if (isUpvoted && !isDownvoted) {
             setIsUpvoted(false);
             setIsDownvoted(true);
             setVoteCount(voteCount - 2);
@@ -55,18 +62,26 @@ export default function UpvoteDownvoteComponent({ props }: { props: Props }) {
     return (
         <div className="flex flex-col items-center">
             <button className={`text-gray-400`} onClick={handleUpvote}>
-                {isUpvoted? (
-                    <BiUpArrow className='hover:transition-all duration-150 ease-linear upvoteDownvoteIcon' fill="rgba(7, 104, 159, 1)" size={24} />
+                {isUpvoted ? (
+                    <BiUpArrow
+                        className="upvoteDownvoteIcon duration-150 ease-linear hover:transition-all"
+                        fill="rgba(7, 104, 159, 1)"
+                        size={24}
+                    />
                 ) : (
-                    <BiUpArrow className='upvoteDownvoteIcon' size={24} />
+                    <BiUpArrow className="upvoteDownvoteIcon" size={24} />
                 )}
             </button>
             <span className=" font-medium ">{voteCount}</span>
             <button className={`text-gray-400`} onClick={handleDownvote}>
-                {isDownvoted? (
-                    <BiDownArrow className='upvoteDownvoteIcon' fill="rgba(7, 104, 159, 1)" size={24} />
+                {isDownvoted ? (
+                    <BiDownArrow
+                        className="upvoteDownvoteIcon"
+                        fill="rgba(7, 104, 159, 1)"
+                        size={24}
+                    />
                 ) : (
-                    <BiDownArrow className='upvoteDownvoteIcon' size={24} />
+                    <BiDownArrow className="upvoteDownvoteIcon" size={24} />
                 )}
             </button>
         </div>

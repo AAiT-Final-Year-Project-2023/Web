@@ -20,7 +20,7 @@ export default function Page() {
         console.log({
             username: username.current?.value,
             password: password.current?.value,
-            email: email.current?.value
+            email: email.current?.value,
         });
 
         try {
@@ -34,7 +34,7 @@ export default function Page() {
                     body: JSON.stringify({
                         username: username.current?.value,
                         password: password.current?.value,
-                        email: email.current?.value
+                        email: email.current?.value,
                     }),
                 },
             );
@@ -60,7 +60,7 @@ export default function Page() {
             //     router.push('/admin');
             //     return;
             // }
-            router.push('/home');
+            router.push('/emailConfirmation');
         } catch (err) {
             alert(err);
             console.error(err);
@@ -79,7 +79,7 @@ export default function Page() {
                                 className="mb-2 block text-sm font-bold "
                                 htmlFor="email"
                             >
-                               Email 
+                                Email
                             </label>
                             <input
                                 className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
@@ -124,9 +124,14 @@ export default function Page() {
                                 className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
                                 type="submit"
                             >
-                               Register 
+                                Register
                             </button>
-                           <Link href={'/login'}>Login</Link> 
+                            <Link
+                                className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
+                                href={'/login'}
+                            >
+                                Login
+                            </Link>
                         </div>
                     </form>
                     <div className="text-center">

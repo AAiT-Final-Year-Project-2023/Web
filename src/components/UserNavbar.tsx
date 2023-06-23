@@ -48,18 +48,21 @@ export default function UserNavbar() {
                                 <div className="f flex w-10 items-center justify-center rounded-full">
                                     {data && data.image ? (
                                         <img
-                                            src={data.image.includes('googleusercontent') ? 
-                                            data.image : 
-                                            `http://${process.env.backendHost}/uploads/profile_images/${data.image}`}
+                                            src={
+                                                data.image.includes(
+                                                    'googleusercontent',
+                                                )
+                                                    ? data.image
+                                                    : `http://${process.env.backendHost}/uploads/profile_images/${data.image}`
+                                            }
                                         />
                                     ) : (
                                         <p className="h-full bg-green-200 text-lg leading-loose ">
-                                        {data && data.username
-                                            ? data.username.charAt(0)
-                                            : ''}
-                                    </p>
+                                            {data && data.username
+                                                ? data.username.charAt(0)
+                                                : ''}
+                                        </p>
                                     )}
-                                    
                                 </div>
                             )}
                         </label>

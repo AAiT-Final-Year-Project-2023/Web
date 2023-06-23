@@ -105,7 +105,6 @@ export default function AudioAnnotatorComponent({
             wavesurferRegions.current = wavesurfer.current.registerPlugin(
                 RegionsPlugin.create(),
             );
-
         }
 
         wavesurferRegions.current?.on('region-updated', regionUpdatedHandler);
@@ -277,9 +276,9 @@ export default function AudioAnnotatorComponent({
 
     return (
         <div className="">
-            <div className="flex items-center justify-around my-5">
+            <div className="my-5 flex items-center justify-around">
                 <input
-                    className='file-input file-input-bordered file-input-primary w-full max-w-xs'
+                    className="file-input-bordered file-input-primary file-input w-full max-w-xs"
                     type="file"
                     accept={supportedExtensions
                         .map((ext) => `.${ext}`)
@@ -289,13 +288,13 @@ export default function AudioAnnotatorComponent({
 
                 {wavesurfer.current && audioFile && (
                     <>
-                        <div className='flex gap-3 items-center'>
+                        <div className="flex items-center gap-3">
                             <label htmlFor="tag-select">Tag: </label>
                             <select
                                 id="tag-select"
                                 value={selectedTag}
                                 onChange={handleTagChange}
-                                className="select select-primary w-full max-w-xs"
+                                className="select-primary select w-full max-w-xs"
                             >
                                 {tags.map((tag) => (
                                     <option key={tag} value={tag}>
@@ -311,8 +310,8 @@ export default function AudioAnnotatorComponent({
                         >
                             Add New Annotation
                         </button>
-
-                    </>)}
+                    </>
+                )}
             </div>
             <div ref={wavesurferContainer} />
             {audioFile && wavesurfer.current ? (
@@ -355,10 +354,11 @@ export default function AudioAnnotatorComponent({
                             <input
                                 onChange={handleVolumeChange}
                                 type="range"
-                                className={`h-4 w-full appearance-none rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none ${isMuted
+                                className={`h-4 w-full appearance-none rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none ${
+                                    isMuted
                                         ? 'thumb:bg-gray-400'
                                         : 'thumb:bg-blue-500'
-                                    }`}
+                                }`}
                                 value={volume}
                             />
                             <p className={isMuted ? `text-gray-400` : 'black'}>

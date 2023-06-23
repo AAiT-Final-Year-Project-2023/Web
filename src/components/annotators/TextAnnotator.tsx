@@ -55,7 +55,7 @@ export default function TextAnnotatorComponent({
             const file_extention = file_name.substring(
                 file_name.lastIndexOf('.') + 1,
             );
-            
+
             if (!supported_extensions.includes(file_extention)) {
                 alert('Unsupported file type!');
                 return;
@@ -86,7 +86,7 @@ export default function TextAnnotatorComponent({
                 <div className="flex items-center gap-3">
                     <label htmlFor="tag-select">Tag:</label>
                     <select
-                        className="select select-primary w-full max-w-xs"
+                        className="select-primary select w-full max-w-xs"
                         id="tag-select"
                         onChange={handleTagChange}
                     >
@@ -113,17 +113,17 @@ export default function TextAnnotatorComponent({
                     </div>
                 )}
 
-                <div className="flex w-full gap-4 items-end justify-between">
+                <div className="flex w-full items-end justify-between gap-4">
                     <label className="block">
                         <input
                             type="file"
-                            className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                            className="file-input-bordered file-input-primary file-input w-full max-w-xs"
                             onChange={handleFileChange}
                         />
                     </label>
                     <button
                         onClick={handleSubmit}
-                        className="btn btn-outline btn-primary"
+                        className="btn-primary btn-outline btn"
                     >
                         Submit
                     </button>

@@ -9,7 +9,9 @@ export default function Page() {
     const email = useRef<HTMLInputElement>(null);
     const code = useRef<HTMLInputElement>(null);
 
-    const handleConfirmation = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleConfirmation = async (
+        event: React.FormEvent<HTMLFormElement>,
+    ) => {
         event.preventDefault();
         // do frontend validation here
 
@@ -28,7 +30,7 @@ export default function Page() {
                     },
                     body: JSON.stringify({
                         email: email.current?.value,
-                        code: code.current?.value
+                        code: code.current?.value,
                     }),
                 },
             );
@@ -73,7 +75,7 @@ export default function Page() {
                                 className="mb-2 block text-sm font-bold "
                                 htmlFor="email"
                             >
-                               Email 
+                                Email
                             </label>
                             <input
                                 className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
@@ -88,7 +90,7 @@ export default function Page() {
                                 className="mb-2 block text-sm font-bold "
                                 htmlFor="code"
                             >
-                               Code 
+                                Code
                             </label>
                             <input
                                 className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight  shadow focus:outline-none"
@@ -98,13 +100,13 @@ export default function Page() {
                                 ref={code}
                             />
                         </div>
-                       
+
                         <div className="flex items-center justify-between">
                             <button
                                 className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
                                 type="submit"
                             >
-                              Confirm 
+                                Confirm
                             </button>
                         </div>
                     </form>

@@ -51,12 +51,19 @@ export default function Page() {
                     },
                 },
             );
+            if (!meRes.ok) {
+                alert('Wrong credentials');
+            }
             const meData: Me = await meRes.json();
+            console.log(meData);
+            if (!meData) {
+                alert('Wrong credentials');
+            }
 
-            // if (data2.roles.includes(Role.ADMIN)) {
-            //     router.push('/admin');
-            //     return;
-            // }
+            if (meData.roles.includes(Role.ADMIN)) {
+                router.push('/admin');
+                return;
+            }
             router.push('/home');
         } catch (err) {
             alert(err);
@@ -108,14 +115,17 @@ export default function Page() {
                             >
                                 Sign In
                             </button>
-                            <div className='flex gap-4'>
+                            <div className="flex gap-4">
                                 <a
                                     className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
                                     href="#"
                                 >
                                     Forgot Password?
                                 </a>
-                                <Link href={'/register'}>
+                                <Link
+                                    className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
+                                    href={'/register'}
+                                >
                                     Register
                                 </Link>
                             </div>

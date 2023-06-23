@@ -15,7 +15,7 @@ export default async function Page() {
 
     return (
         <main className="">
-            <section className='my-2'>
+            <section className="my-2">
                 <h1 className="text-3xl font-bold">Datasets</h1>
                 <Suspense
                     fallback={

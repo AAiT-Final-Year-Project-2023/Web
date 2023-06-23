@@ -49,6 +49,28 @@ export const upvote = async (url: string, token: string): Promise<any> => {
     return await response.json();
 };
 
+export const accept = async (url: string, token: string): Promise<any> => {
+    const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            Authorization: `${token}`,
+        },
+        cache: 'no-store',
+    });
+    return await response.json();
+};
+
+export const reject = async (url: string, token: string): Promise<any> => {
+    const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            Authorization: `${token}`,
+        },
+        cache: 'no-store',
+    });
+    return await response.json();
+};
+
 export const downvote = async (url: string, token: string): Promise<any> => {
     const response = await fetch(url, {
         headers: {

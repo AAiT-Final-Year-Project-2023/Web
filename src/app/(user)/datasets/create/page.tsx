@@ -1,19 +1,20 @@
-'use client'
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
+'use client';
+import { showInfoAlert } from '@/common/functions';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 
 export default function Page() {
+    const fileRef = useRef<HTMLInputElement>(null);
+    const titleRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLTextAreaElement>(null);
+    const labelsRef = useRef<HTMLInputElement>(null);
+    const datatypeRef = useRef<HTMLSelectElement>(null);
+    const formRef = useRef(null);
+
     const router = useRouter();
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-
-        const fileRef = useRef<HTMLInputElement>(null);
-        const titleRef = useRef<HTMLInputElement>(null);
-        const descriptionRef = useRef<HTMLTextAreaElement>(null);
-        const labelsRef = useRef<HTMLSelectElement>(null);
-        const datatypeRef = useRef<HTMLSelectElement>(null);
-
         try {
             const token = Cookies.get('datashelf_token');
             const formData = new FormData();
@@ -39,13 +40,16 @@ export default function Page() {
                 {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `${token}`
+                        Authorization: `${token}`,
                     },
-                    body: formData
+                    body: formData,
                 },
             );
-            console.log(res);
+            const data = await res.json();
+            if (data.statusCode === 400) {
+                return alert(data.message);
+            }
+            showInfoAlert('Dataset created, pending approval', document);
             router.push('/datasets');
         } catch (err) {
             alert(err);
@@ -55,38 +59,83 @@ export default function Page() {
 
     return (
         <main className="">
-            <div className="flex justify-center w-full">
-                <form className="p-8 borderrounded-lg shadow-lg">
+            <div className="flex w-full justify-center">
+                <form
+                    ref={formRef}
+                    className="borderrounded-lg p-8 shadow-lg"
+                    onSubmit={handleSubmit}
+                >
                     <div className="mb-4">
-                        <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+                        <label className="label">
+                            <span className="label-text">Select zip file</span>
+                        </label>
+                        <input
+                            type="file"
+                            className="file-input-bordered file-input-primary file-input w-full max-w-xs"
+                            ref={fileRef}
+                            accept=".zip"
+                        />
                     </div>
                     <div className="mb-4">
+                        <label className="label">
+                            <span className="label-text">Title</span>
+                        </label>
                         <div className="form-control w-full max-w-xs">
-                            <input type="text" placeholder="Title" className="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="text"
+                                placeholder=""
+                                className="input-bordered input-primary input w-full max-w-xs"
+                                ref={titleRef}
+                            />
                         </div>
                     </div>
                     <div className="mb-4">
+                        <label className="label">
+                            <span className="label-text">Description</span>
+                        </label>
                         <div className="form-control w-full max-w-xs">
-                            <textarea className="textarea" placeholder="Description"></textarea>
+                            <textarea
+                                className="textarea-primary textarea"
+                                placeholder=""
+                                ref={descriptionRef}
+                            ></textarea>
                         </div>
                     </div>
                     <div className="mb-4">
+                        <label className="label">
+                            <span className="label-text">
+                                Labels (separated with comma)
+                            </span>
+                        </label>
                         <div className="form-control w-full max-w-xs">
-                            <input type="text" placeholder="Labels (separated with comma)" className="input input-bordered w-full max-w-xs" />
+                            <input
+                                type="text"
+                                placeholder=""
+                                className="input-bordered input-primary input w-full max-w-xs"
+                                ref={labelsRef}
+                            />
                         </div>
                     </div>
-                    <div className="form-control w-full max-w-xs">
+                    <div className="form-control mb-4 w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Datatype</span>
                         </label>
-                        <select className="select select-bordered">
-                            <option>Image</option>
-                            <option>Video</option>
-                            <option>Audio</option>
-                            <option>Text</option>
+                        <select
+                            className="select-bordered select-primary select"
+                            ref={datatypeRef}
+                        >
+                            <option value={'image'}>Image</option>
+                            <option value={'video'}>Video</option>
+                            <option value={'audio'}>Audio</option>
+                            <option value={'text'}>Text</option>
                         </select>
                     </div>
-                    <button type="submit" className="btn btn-outline btn-success">Create</button>
+                    <button
+                        type="submit"
+                        className="btn-success btn-outline btn"
+                    >
+                        Create
+                    </button>
                 </form>
             </div>
         </main>

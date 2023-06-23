@@ -15,3 +15,9 @@ export enum Role {
     ADMIN = 'admin',
     USER = 'user',
 }
+
+export enum DatasetStatus {
+    PENDING = 'pending',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
+}

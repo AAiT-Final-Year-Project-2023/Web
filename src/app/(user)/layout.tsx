@@ -13,17 +13,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <html lang="en">
             <body>
                 <UserNavbar />
-                <div className='flex gap-20'>
-                    <div className='relative'>
-                        <aside className='fixed top-[38%]'>
-                            <div className=''>
+                <div className="flex gap-20">
+                    <div className="relative">
+                        <aside className="fixed top-[38%]">
+                            <div className="">
                                 <Sidebar />
                             </div>
                         </aside>
                     </div>
-                    <div className='flex-grow'>
-                        {children}
-                    </div>
+                    <div className="flex-grow">{children}</div>
                 </div>
                 <UserFooter />
             </body>
